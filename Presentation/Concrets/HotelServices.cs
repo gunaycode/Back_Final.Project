@@ -1,5 +1,6 @@
 ﻿using Application.Abstract;
 using Application.DTOs;
+using Application.DTOs.HotelDto;
 using Domain.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

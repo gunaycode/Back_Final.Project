@@ -1,5 +1,6 @@
 ﻿using Application.Abstract;
 using Application.DTOs;
+using Application.DTOs.HotelDto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
