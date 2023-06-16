@@ -9,8 +9,9 @@ namespace Domain.Entities
 {
     public  class User:IdentityUser<int>
     {
-        public string UserName { get; set; } = null!;
+       
         public bool IsDeleted { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<CommentLike> CommentLikes { get; set; }
     }
 }

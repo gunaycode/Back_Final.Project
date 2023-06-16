@@ -9,6 +9,7 @@ namespace Application.Abstract
 {
     public interface IHotelServices
     {
-        Task<GetHotelDto> AsyncCreate(PostHotelDto postHotelDto);
+        Task<GetHotelDto> CreateAsync(PostHotelDto postHotelDto);
+        //Task<GetHotelDto> UpdateAsync(PostHotelDto postHotelDto, int Id);
     }
 }

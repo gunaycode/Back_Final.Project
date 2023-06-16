@@ -15,15 +15,17 @@ namespace Persistance.Configuration
         {
             builder.ToTable("CommentLikes"); 
 
-            builder.HasKey(cl => new { cl.CommentId, cl.UserId }); 
+            builder.HasKey(cl => new { cl.CommentId, cl.UserId });
 
             builder.HasOne(cl => cl.Comment)
-                .WithMany()
-                .HasForeignKey(cl => cl.CommentId); 
+                .WithMany(c => c.CommentLikes)
+                .HasForeignKey(cl => cl.CommentId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(cl => cl.User)
-                .WithMany()
-                .HasForeignKey(cl => cl.UserId); 
+                .WithMany(c => c.CommentLikes)
+                .HasForeignKey(cl => cl.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

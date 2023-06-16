@@ -27,8 +27,9 @@ namespace Persistance.Configuration
                 .HasMaxLength(100); 
 
             builder.HasMany(c => c.Cities)
-                .WithOne()
-                .HasForeignKey(c => c.CountryId); 
+                .WithOne(c=>c.Country)
+                .HasForeignKey(c => c.CountryId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
     

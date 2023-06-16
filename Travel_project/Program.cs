@@ -1,6 +1,8 @@
+using Application.Abstract;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Persistance.Concrets;
 using Persistance.DataContext;
 using System;
 
@@ -26,7 +28,7 @@ builder.Services.AddDbContext<TravelDbContext>(opt =>
 })
     .AddDefaultTokenProviders()
     .AddEntityFrameworkStores<TravelDbContext>();
-
+builder.Services.AddScoped<IHotelServices,HotelServices>();
 var app = builder.Build();
 
 

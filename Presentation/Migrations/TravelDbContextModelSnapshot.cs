@@ -22,6 +22,21 @@ namespace Persistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("CityHotel", b =>
+                {
+                    b.Property<int>("CitiesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HotelsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CitiesId", "HotelsId");
+
+                    b.HasIndex("HotelsId");
+
+                    b.ToTable("CityHotel");
+                });
+
             modelBuilder.Entity("Domain.Entities.City", b =>
                 {
                     b.Property<int>("Id")
@@ -31,9 +46,6 @@ namespace Persistance.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CountryId1")
                         .HasColumnType("int");
 
                     b.Property<bool>("Created")
@@ -53,8 +65,6 @@ namespace Persistance.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
-
-                    b.HasIndex("CountryId1");
 
                     b.ToTable("Cities", (string)null);
                 });
@@ -83,14 +93,9 @@ namespace Persistance.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Comments", (string)null);
                 });
@@ -103,12 +108,7 @@ namespace Persistance.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CommentId1")
-                        .HasColumnType("int");
-
                     b.HasKey("CommentId", "UserId");
-
-                    b.HasIndex("CommentId1");
 
                     b.HasIndex("UserId");
 
@@ -194,7 +194,8 @@ namespace Persistance.Migrations
 
                     b.Property<string>("ImageName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1100)
+                        .HasColumnType("nvarchar(1100)");
 
                     b.Property<bool>("IsActived")
                         .HasColumnType("bit");
@@ -281,21 +282,6 @@ namespace Persistance.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("HotelCity", b =>
-                {
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HotelId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CityId", "HotelId");
-
-                    b.HasIndex("HotelId");
-
-                    b.ToTable("HotelCity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -431,18 +417,27 @@ namespace Persistance.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.City", b =>
+            modelBuilder.Entity("CityHotel", b =>
                 {
-                    b.HasOne("Domain.Entities.Country", null)
-                        .WithMany("Cities")
-                        .HasForeignKey("CountryId")
+                    b.HasOne("Domain.Entities.City", null)
+                        .WithMany()
+                        .HasForeignKey("CitiesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Country", "Country")
+                    b.HasOne("Domain.Entities.Hotel", null)
                         .WithMany()
-                        .HasForeignKey("CountryId1")
+                        .HasForeignKey("HotelsId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.City", b =>
+                {
+                    b.HasOne("Domain.Entities.Country", "Country")
+                        .WithMany("Cities")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Country");
@@ -451,14 +446,10 @@ namespace Persistance.Migrations
             modelBuilder.Entity("Domain.Entities.Comment", b =>
                 {
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.User", null)
                         .WithMany("Comments")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -466,19 +457,15 @@ namespace Persistance.Migrations
             modelBuilder.Entity("Domain.Entities.CommentLike", b =>
                 {
                     b.HasOne("Domain.Entities.Comment", "Comment")
-                        .WithMany()
+                        .WithMany("CommentLikes")
                         .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Comment", null)
-                        .WithMany("CommentLikes")
-                        .HasForeignKey("CommentId1");
-
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("CommentLikes")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Comment");
@@ -490,21 +477,6 @@ namespace Persistance.Migrations
                 {
                     b.HasOne("Domain.Entities.Hotel", null)
                         .WithMany("Images")
-                        .HasForeignKey("HotelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("HotelCity", b =>
-                {
-                    b.HasOne("Domain.Entities.City", null)
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Hotel", null)
-                        .WithMany()
                         .HasForeignKey("HotelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -578,6 +550,8 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
+                    b.Navigation("CommentLikes");
+
                     b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618

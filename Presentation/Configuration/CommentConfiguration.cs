@@ -22,14 +22,15 @@ namespace Persistance.Configuration
                 .IsRequired(); 
 
             builder.HasOne(c => c.User)
-                .WithMany()
-                .HasForeignKey(c => c.UserId); 
+                .WithMany(c=>c.Comments)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(c => c.CommentLikes)
                 .WithOne(cl => cl.Comment)
-                .HasForeignKey(cl => cl.CommentId); 
+                .HasForeignKey(cl => cl.CommentId) 
+                 .OnDelete(DeleteBehavior.Restrict);
 
-            
         }
 
     }

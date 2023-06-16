@@ -22,17 +22,10 @@ namespace Persistance.Configuration
                 .HasMaxLength(100); 
 
             builder.Property(h => h.Price)
-                .HasColumnType("decimal(18, 2)"); 
+                .HasColumnType("decimal(18, 2)");
 
             builder.HasMany(h => h.Cities)
-                .WithMany(c => c.Hotels)
-                .UsingEntity<Dictionary<string, object>>(
-                    "HotelCity",
-                    j => j.HasOne<City>().WithMany().HasForeignKey("CityId"),
-                    j => j.HasOne<Hotel>().WithMany().HasForeignKey("HotelId")
-                );
-
-           
+                .WithMany(c => c.Hotels);
         }
 
 
