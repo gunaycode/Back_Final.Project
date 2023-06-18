@@ -11,5 +11,8 @@ namespace Domain.Entities
     {
         public int HotelId { get; set; }
         public string ImageName { get; set; } = null!;
+        public string Path { get; set; }= null!;
+
+       
     }
 }

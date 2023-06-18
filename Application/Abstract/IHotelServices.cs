@@ -1,4 +1,6 @@
-﻿using Application.DTOs;
+﻿using Application.DTOs.HotelDto;
+using Application.DTOs.ImageHotelDto;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,12 @@ namespace Application.Abstract
     public interface IHotelServices
     {
         Task<GetHotelDto> CreateAsync(PostHotelDto postHotelDto);
-        //Task<GetHotelDto> UpdateAsync(PostHotelDto postHotelDto, int Id);
+        Task<GetHotelDto> UpdateAsync(UpdateHotelDto updateHotelDto, int id);
+        Task<List<GetImageHotelDto>> UpdateImagesHotelAsync(UpdateImagesHotelDto updateImageHotelDto, int hotelId);
+        Task<GetHotelDto> GetByIdAsync(int id); 
+        Task<GetHotelDto> GetAllAsync();
+
+
+        
     }
 }

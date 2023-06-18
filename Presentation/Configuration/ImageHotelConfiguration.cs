@@ -16,9 +16,10 @@ namespace Persistance.Configuration
 
             builder.Property(i => i.ImageName)
                 .IsRequired()
-                .HasMaxLength(1100); 
+                .HasMaxLength(1100);
 
-            
+            builder.Property(h => h.Path)
+            .IsRequired();
         }
     }
 }

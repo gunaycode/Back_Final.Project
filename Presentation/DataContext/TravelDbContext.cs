@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.DTOs.HotelDto;
+using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace Persistance.DataContext
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<ImageHotel> ImagesHotel { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

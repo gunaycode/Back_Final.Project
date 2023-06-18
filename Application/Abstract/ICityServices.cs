@@ -1,5 +1,4 @@
-﻿using Application.DTOs;
-using Application.DTOs.CityDto;
+﻿using Application.DTOs.CityDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

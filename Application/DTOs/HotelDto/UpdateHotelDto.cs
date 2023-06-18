@@ -9,10 +9,11 @@ namespace Application.DTOs.HotelDto
 {
     public class UpdateHotelDto
     {
+       
         public string Name { get; set; } = null!;
         public int Rating { get; set; }
         public decimal Price { get; set; }
 
-        public List<IFormFile> Images { get; set; }
+        
     }
 }
