@@ -1,4 +1,4 @@
-﻿using Application.DTOs.CommentDto;
+﻿
 using Application.DTOs.ImageHotelDto;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -11,8 +11,10 @@ namespace Application.Abstract
 {
     public interface IImageHotelServices
     {
-        Task<GetImageHotelDto> AsyncCreate(PostImageHotelDto postImageHotelDto);
+        Task<GetImageHotelDto> AsyncCreate(ImageHotelPost imageHotelPost);
        
 
     }
+
+   
 }

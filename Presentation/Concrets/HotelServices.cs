@@ -32,7 +32,7 @@ namespace Persistance.Concrets
                 
                 Name = postHotelDto.Name,
                 Rating = postHotelDto.Rating,
-                Price = postHotelDto.Price,
+               
 
             };
             if (hotel.Images != null)
@@ -58,7 +58,7 @@ namespace Persistance.Concrets
                 Id = hotel.Id,
                 Name = hotel.Name,
                 Rating = hotel.Rating,
-                Price = (decimal)hotel.Price
+                
             };
         }
 
@@ -73,7 +73,7 @@ namespace Persistance.Concrets
 
             hotel.Name = updateHotelDto.Name;
             hotel.Rating = updateHotelDto.Rating;
-            hotel.Price = updateHotelDto.Price;
+           
 
             await _context.SaveChangesAsync();
 
@@ -82,7 +82,7 @@ namespace Persistance.Concrets
                 Id = hotel.Id,
                 Name = hotel.Name,
                 Rating = hotel.Rating,
-                Price = (decimal)hotel.Price
+                
             };
         }
 
@@ -90,7 +90,7 @@ namespace Persistance.Concrets
         {
             Hotel? hotel = await _context.Hotels.FirstOrDefaultAsync(h => h.Id == id) ??
                 throw new NotFoundException();
-            return new GetHotelDto { Id = hotel.Id, Name = hotel.Name, Rating = hotel.Rating, Price = hotel.Price };
+            return new GetHotelDto { Id = hotel.Id, Name = hotel.Name, Rating = hotel.Rating };
 
         }
 
@@ -103,7 +103,7 @@ namespace Persistance.Concrets
                 Id = h.Id,
                 Name = h.Name,
                 Rating = h.Rating,
-                Price = h.Price
+               
             }).ToList();
             return new GetHotelDto { };
         }
@@ -123,20 +123,17 @@ namespace Persistance.Concrets
                 {
                     throw new FileTypeException("Check exception");
                 }
-
                 if (!image.CheckFileType("image/"))
                 {
                     throw new FileSizeException();
                 }
                 string newFileName = await image.FileUploadAsync(_webHostEnvironment.WebRootPath, "Images");
-
                 ImageHotel newImage = new ImageHotel
                 {
                     ImageName = newFileName,
                     HotelId = hotelId,
                     Path=Path.Combine(_webHostEnvironment.WebRootPath, "Images")    
                 };
-
                 hotel.Images.Add(newImage);
                 updatedImages.Add(new GetImageHotelDto
                 {

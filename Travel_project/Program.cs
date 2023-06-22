@@ -1,10 +1,15 @@
 using Application.Abstract;
 using Domain.Entities;
+using Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Persistance.Concrets;
 using Persistance.DataContext;
 using System;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,13 +29,62 @@ builder.Services.AddDbContext<TravelDbContext>(opt =>
     opt.Password.RequireDigit = true;
     opt.SignIn.RequireConfirmedEmail = true;
     opt.User.RequireUniqueEmail = true;
+    opt.Password.RequireNonAlphanumeric = false;
 
 })
     .AddDefaultTokenProviders()
     .AddEntityFrameworkStores<TravelDbContext>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidAudience = builder.Configuration["JWT:audience"],
+        ValidIssuer = builder.Configuration["JWT:issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecurityKey"])),
+        ClockSkew = TimeSpan.FromSeconds(0)
+    };
+});
 builder.Services.AddScoped<IHotelServices,HotelServices>();
-var app = builder.Build();
+builder.Services.AddScoped<ICurrentServices,CurrentUserServices>();
+builder.Services.AddScoped<ICommentServices, CommentServices>(); 
+builder.Services.AddScoped<ICommentLikeServices, CommentLikeServices>();
+builder.Services.AddScoped<IReservationServices, ReservationServices>();
+builder.Services.AddScoped<IRoomServices, RoomServices>();
+builder.Services.AddScoped<IEmailServices, EmailServices>();
+    
+    
 
+builder.Services.AddSwaggerGen(opt =>
+{
+    opt.SwaggerDoc("v1", new OpenApiInfo()
+    {
+        Version = "v1",
+    });
+    opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        BearerFormat = "JWT",
+        Scheme = "Bearer",
+    });
+    opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+    {
+        new OpenApiSecurityScheme
+        {
+            Reference = new OpenApiReference
+            {
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer"
+            }
+        },
+        new string[] { }
+    }
+    });
+});
+var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
@@ -39,7 +93,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public  class ImageHotel:BaseEntity
+    public  class ImageHotel:BaseAuditable
     {
         public int HotelId { get; set; }
         public string ImageName { get; set; } = null!;

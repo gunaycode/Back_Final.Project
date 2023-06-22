@@ -19,13 +19,18 @@ namespace Persistance.Configuration
             builder.HasKey(h => h.Id); 
             builder.Property(h => h.Name)
                 .IsRequired()
-                .HasMaxLength(100); 
+                .HasMaxLength(100);
+            builder.Property(h => h.Rating).IsRequired();
+            
 
-            builder.Property(h => h.Price)
-                .HasColumnType("decimal(18, 2)");
+            builder.HasOne(h => h.City)
+                .WithMany(c => c.Hotels)
+                .HasForeignKey(h=>h.CityId)
+                .IsRequired();
 
-            builder.HasMany(h => h.Cities)
-                .WithMany(c => c.Hotels);
+            builder.HasMany(h=>h.Rooms)
+             .WithOne(r => r.Hotel)
+            .HasForeignKey(r => r.HotelId);
         }
 
 

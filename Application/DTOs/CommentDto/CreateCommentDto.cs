@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.CommentDto
 {
-    public class PostImageHotelDto
+    public class CreateCommentDto
     {
-        public string Text { get; set; } = null!;
-        public User User { get; set; } = null!;
-        public string UserId { get; set; }
+        public string Text { get; set; }
+        public int UserId { get; set; }
+       
+
     }
 }

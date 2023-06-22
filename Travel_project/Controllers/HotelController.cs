@@ -2,6 +2,7 @@
 using Application.DTOs;
 using Application.DTOs.HotelDto;
 using Application.DTOs.ImageHotelDto;
+using Application.DTOs.ResponseDto;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

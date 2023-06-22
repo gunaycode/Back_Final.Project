@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Comment:BaseEntity
+    public class Comment:BaseAuditable
     {
         public Comment()
         {

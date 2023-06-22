@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class City:BaseEntity
+    public class City:BaseAuditable
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;

@@ -18,7 +18,6 @@ namespace Persistance.Configuration
             builder.HasKey(c => c.Id); 
             builder.Property(c => c.Name)
                 .IsRequired()
-
                 .HasMaxLength(100); 
 
             builder.HasOne(c => c.Country)

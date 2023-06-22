@@ -10,7 +10,9 @@ namespace Application.DTOs.CommentDto
     public class GetCommentDto
     {
         public int Id { get; set; }
-        public string Text { get; set; } = null!;
+        public string Text { get; set; }
+        public DateTime CreateDate { get; set; }=DateTime.Now;
+
 
     }
 }

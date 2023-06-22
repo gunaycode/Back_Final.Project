@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.CommentDto;
 using System;
+using Application.DTOs.CommentDto;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,8 @@ namespace Application.Abstract
 {
     public interface ICommentServices
     {
-        Task<GetCommentDto> AsyncCreate(PostImageHotelDto postCommentDto);
+        Task<GetCommentDto> CreateAsync(CreateCommentDto commnet);
+        Task CommentDeleteAsync(int id);
         
     }
 }

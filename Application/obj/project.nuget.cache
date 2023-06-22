@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "xOgiGzqcZpk296Or7r9OC+dvjDGDPoAoLsFRI67ujlTGx6yw0cpn38SXblTgulYeztUyc5cRGQm2cQNcoceVxQ==",
+  "dgSpecHash": "9nECivXj/wep2yrA3+p2l1AZ0AGFMW7c1ZxspuiLGkO2LCDLNLBMVbEHCOsphX1vEPpxXqwj1osyn5W3JEypwg==",
   "success": true,
   "projectFilePath": "C:\\Users\\asus\\Desktop\\Travel_project\\Application\\Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\asus\\.nuget\\packages\\fluentvalidation\\11.5.2\\fluentvalidation.11.5.2.nupkg.sha512",
+    "C:\\Users\\asus\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\asus\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.2\\fluentvalidation.dependencyinjectionextensions.11.5.2.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.12\\microsoft.aspnetcore.cryptography.internal.6.0.12.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.12\\microsoft.aspnetcore.cryptography.keyderivation.6.0.12.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",

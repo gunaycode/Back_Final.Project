@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "dbnW5Us2rZV0Ce1pF6aNKN2NhCnjcQGtLFpOjp4rdjYykaS2DeMDxvyvqYawS4bFVduR9ucNyzixe7gzcNdSpA==",
+  "dgSpecHash": "2NOSKgTaouk0wrWwS65g4dgSr9+qCADcgVR4FR6wNnRtd/BHxAh7R011bb0p4RkAmPdMLWIZOwFl6oYLv47tfw==",
   "success": true,
   "projectFilePath": "C:\\Users\\asus\\Desktop\\Travel_project\\Presentation\\Persistance.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\asus\\.nuget\\packages\\fluentvalidation\\11.5.2\\fluentvalidation.11.5.2.nupkg.sha512",
+    "C:\\Users\\asus\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\asus\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.2\\fluentvalidation.dependencyinjectionextensions.11.5.2.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.12\\microsoft.aspnetcore.cryptography.internal.6.0.12.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.12\\microsoft.aspnetcore.cryptography.keyderivation.6.0.12.nupkg.sha512",
