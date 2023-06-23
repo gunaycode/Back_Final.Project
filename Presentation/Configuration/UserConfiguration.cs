@@ -13,6 +13,7 @@ namespace Persistance.Configuration
     {
         void IEntityTypeConfiguration<User>.Configure(EntityTypeBuilder<User> builder)
         {
+            builder.HasKey(x => x.Id);
             builder.Property(u => u.IsDeleted).HasDefaultValue(false);
             builder.Property(u => u.BirthDate).HasColumnType("datetime");
 

@@ -14,10 +14,11 @@ namespace Application.DTOs.RoomDto
         public int Id { get; set; }
         public string RoomName { get; set; }
         public int UsertId { get; set; }
+        public string City { get; set; }
         public decimal Price { get; set; }
         public int HotelId { get; set; }
-        public Hotel Hotel { get; set; }
-        public ICollection<Reservation> Reservations { get; set; }
-
+        
+       
+       
     }
 }

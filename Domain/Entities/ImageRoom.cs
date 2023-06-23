@@ -10,6 +10,7 @@ namespace Domain.Entities
     public class ImageRoom:BaseAuditable
     {
         public int RoomId { get; set; }
+        public Room Room { get; set; }
         public string ImageName { get; set; } = null!;
         public string Path { get; set; } = null!;
     }

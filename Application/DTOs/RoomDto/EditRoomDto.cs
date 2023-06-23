@@ -17,7 +17,6 @@ namespace Application.DTOs.RoomDto
         public int UsertId { get; set; }
         public decimal Price { get; set; }
         public int HotelId { get; set; }
-        public Hotel Hotel { get; set; }
-        public ICollection<Reservation> Reservations { get; set; }
+        
     }
 }

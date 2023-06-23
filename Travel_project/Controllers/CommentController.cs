@@ -54,7 +54,6 @@ namespace Travel_project.Controllers
             {
                 return StatusCode(StatusCodes.Status502BadGateway, new ResponseDto { Status = "Error", Message = ex.Message });
             }
-
             
         }
 
@@ -73,5 +72,7 @@ namespace Travel_project.Controllers
                 });
             }
         }
+
+
     }
 }

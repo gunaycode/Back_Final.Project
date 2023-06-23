@@ -13,7 +13,8 @@ namespace Persistance.Configuration
     {
         public void Configure(EntityTypeBuilder<ImageRoom> builder)
         {
-
+            builder.HasKey(r => r.Id);
+            builder.HasOne(x => x.Room).WithMany(x => x.RoomImages).HasForeignKey(x => x.RoomId);
             builder.Property(i => i.ImageName)
                 .IsRequired()
                 .HasMaxLength(1100);

@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.HotelDto;
 using Application.DTOs.ImageHotelDto;
+using Application.DTOs.RoomDto;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,6 @@ namespace Application.Abstract
         Task<List<GetImageHotelDto>> UpdateImagesHotelAsync(UpdateImagesHotelDto updateImageHotelDto, int hotelId);
         Task<GetHotelDto> GetByIdAsync(int id); 
         Task<GetHotelDto> GetAllAsync();
-
-
         
     }
 }

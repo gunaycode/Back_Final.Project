@@ -147,9 +147,6 @@ namespace Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -309,7 +306,7 @@ namespace Persistance.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("ImageRoom");
+                    b.ToTable("ImagesRoom");
                 });
 
             modelBuilder.Entity("Domain.Entities.Reservation", b =>
@@ -685,11 +682,13 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Domain.Entities.ImageRoom", b =>
                 {
-                    b.HasOne("Domain.Entities.Room", null)
+                    b.HasOne("Domain.Entities.Room", "Room")
                         .WithMany("RoomImages")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("Domain.Entities.Reservation", b =>

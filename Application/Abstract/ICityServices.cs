@@ -9,6 +9,7 @@ namespace Application.Abstract
 {
     public interface ICityServices
     {
-        Task<GetCityDto> AsyncCreate(PostCityDto postCityDto);
+        Task<GetCityDto> CreateAsync(PostCityDto postCityDto);
+        Task<GetCityDto> UpdateAsync( );
     }
 }

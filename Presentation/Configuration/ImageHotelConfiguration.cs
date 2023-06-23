@@ -13,7 +13,7 @@ namespace Persistance.Configuration
     {
         public void Configure(EntityTypeBuilder<ImageHotel> builder)
         {
-
+            builder.HasKey(c => c.Id);
             builder.Property(i => i.ImageName)
                 .IsRequired()
                 .HasMaxLength(1100);

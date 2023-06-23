@@ -14,6 +14,7 @@ namespace Persistance.Configuration
         public void Configure(EntityTypeBuilder<Reservation> builder)
         {
             builder.ToTable("Reservations");
+            builder.HasKey(c => c.Id);
             builder.Property(r => r.Start)
                 .IsRequired();
 

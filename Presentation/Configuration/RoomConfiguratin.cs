@@ -13,7 +13,7 @@ namespace Persistance.Configuration
     {
         public void Configure(EntityTypeBuilder<Room> builder)
         {
-            
+            builder.HasKey(c => c.Id);
 
             builder.Property(r => r.RoomName)
                 .IsRequired();

@@ -1,5 +1,6 @@
 ﻿using Application.Abstract;
 using Application.DTOs.ReservationDto;
+using Persistance.DataContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace Persistance.Concrets
 {
     public class ReservationServices : IReservationServices
     {
+        private readonly TravelDbContext _dbcontext;
+        
         public Task<GetReservationDto> CreateAsync(CreateReservationDto reservationDto)
         {
             throw new NotImplementedException();

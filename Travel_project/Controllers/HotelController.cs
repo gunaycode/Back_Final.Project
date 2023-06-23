@@ -33,7 +33,6 @@ namespace Travel_project.Controllers
             try
             {
                 return Ok(await _services.CreateAsync(postHotelDto));
-
             }
             catch (NotFoundException ex)
             {
@@ -47,7 +46,6 @@ namespace Travel_project.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
@@ -63,7 +61,6 @@ namespace Travel_project.Controllers
                 });
             }
         }
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
         {

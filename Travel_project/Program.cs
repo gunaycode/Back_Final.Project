@@ -51,7 +51,9 @@ builder.Services.AddScoped<ICommentLikeServices, CommentLikeServices>();
 builder.Services.AddScoped<IReservationServices, ReservationServices>();
 builder.Services.AddScoped<IRoomServices, RoomServices>();
 builder.Services.AddScoped<IEmailServices, EmailServices>();
-    
+builder.Services.AddScoped<ICountryServices, CountryServices>();    
+
+
     
 
 builder.Services.AddSwaggerGen(opt =>

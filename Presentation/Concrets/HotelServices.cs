@@ -32,7 +32,7 @@ namespace Persistance.Concrets
                 
                 Name = postHotelDto.Name,
                 Rating = postHotelDto.Rating,
-               
+
 
             };
             if (hotel.Images != null)
@@ -107,7 +107,6 @@ namespace Persistance.Concrets
             }).ToList();
             return new GetHotelDto { };
         }
-
         public async Task <List<GetImageHotelDto>> UpdateImagesHotelAsync(UpdateImagesHotelDto updateImageHotelDto, int hotelId)
         {
             Hotel? hotel = await _context.Hotels.FindAsync(hotelId);

@@ -11,7 +11,6 @@ namespace Domain.Entities
     {
         
         public string Name { get; set; } = null!;
-        public int CityId { get; set; }
         public ICollection<City> Cities{ get; set;}
     }
 }

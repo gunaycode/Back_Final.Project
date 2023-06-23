@@ -13,7 +13,6 @@ namespace Domain.Entities
         public Hotel()
         {
             Images = new HashSet<ImageHotel>();
-            
         }
         public string Name { get; set; } = null!;
         public int Rating { get; set; }

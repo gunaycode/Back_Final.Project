@@ -13,5 +13,6 @@ namespace Application.DTOs.CityDto
         public Country Country { get; set; } = null!;
         public int CountryId { get; set; }
         public ICollection<Hotel> Hotels { get; set; } = null!;
+
     }
 }

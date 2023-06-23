@@ -40,18 +40,7 @@ namespace Persistance.Concrets
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
         }
-        public async Task<GetCommentDto> GetAll(int id)
-        {
-            List<Comment>? comment = await _context.Comments.ToListAsync() ?? throw new NotfoundException();
-            List<GetCommentDto> postDtos = comment.Select(p => new GetCommentDto
-            {
-                Id = p.Id,
-                Text = p.Text,
-            }).ToList();
-
-            return new GetCommentDto { };
-        }
-
+        
 
     }
 }
