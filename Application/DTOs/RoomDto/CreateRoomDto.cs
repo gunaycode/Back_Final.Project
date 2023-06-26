@@ -13,10 +13,10 @@ namespace Application.DTOs.RoomDto
 {
     public class CreateRoomDto
     {
-        public string RoomName { get; set; }
         public decimal Price { get; set; }
         public int HotelId { get; set; }
-        public string City { get; set; }
+        public int RoomCategoryId { get; set; }
+        public int CityId { get; set; }
         public List<IFormFile> Images { get; set; }
   
     }

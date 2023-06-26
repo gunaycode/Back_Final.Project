@@ -13,7 +13,7 @@ namespace Travel_project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController:ControllerBase
+    public class AuthController : ControllerBase
     {
         readonly UserManager<User> _userManager;
         readonly IConfiguration _configuration;
@@ -61,40 +61,34 @@ namespace Travel_project.Controllers
                 return BadRequest(new { Message = "Username or password incorrect!!!" });
             }
 
-            // JWT oluşturma işlemine geç
-
-            // JWT ayarları ve imzalama bilgileri
             var jwtSettings = _configuration.GetSection("JWT");
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["SecurityKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            // JWT taleplerini oluştur
             var claims = new List<Claim>
-    {
-        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-        new Claim(ClaimTypes.Email, user.Email),
-        new Claim("sub",user.Id.ToString())
-        // İhtiyaç duyduğunuz diğer talepleri ekleyin
-    };
+            {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.Email, user.Email),
+            };
 
-            // JWT oluşturma
+            IList<string> roles =await  _userManager.GetRolesAsync(user);
+            claims.AddRange(roles.Select(name => new Claim(ClaimTypes.Role, name)));
+
             var token = new JwtSecurityToken(
                 issuer: jwtSettings["Issuer"],
                 audience: jwtSettings["Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddDays(7), // Tokenın süresi
+                expires: DateTime.UtcNow.AddDays(7),
                 signingCredentials: credentials
             );
 
-            // JWT tokenı oluştur
             var tokenHandler = new JwtSecurityTokenHandler();
             var encodedToken = tokenHandler.WriteToken(token);
 
-            // Cevap olarak tokenı döndür
             return Ok(new { Token = encodedToken });
         }
 
     }
 }
- 
+
 

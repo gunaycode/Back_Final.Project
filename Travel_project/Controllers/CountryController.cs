@@ -15,7 +15,6 @@ namespace Travel_project.Controllers
     {
         private readonly TravelDbContext _context;
         public readonly ICountryServices _servives;
-
         public CountryController(TravelDbContext context, ICountryServices services)
         {
             _context = context;
@@ -77,7 +76,7 @@ namespace Travel_project.Controllers
         {
             try
             {
-                return StatusCode(200, await _context.Comments.ToListAsync());
+                return StatusCode(200, await _context.Countries.ToListAsync());
             }
             catch (Exception ex)
             {

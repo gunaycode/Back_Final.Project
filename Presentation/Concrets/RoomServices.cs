@@ -1,5 +1,4 @@
 ﻿using Application.Abstract;
-using Application.DTOs.HotelDto;
 using Application.DTOs.ImageRoomDto;
 using Application.DTOs.RoomDto;
 using Domain.Entities;
@@ -8,12 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataContext;
 using Persistance.Extantion;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Persistance.Concrets
 {
     public class RoomServices : IRoomServices
@@ -30,10 +23,9 @@ namespace Persistance.Concrets
         {
             Room room = new Room()
             {
-                RoomName = roomDto.RoomName,
                 Price = roomDto.Price,
                 HotelId = roomDto.HotelId,
-              
+                CategoryNameId=roomDto.RoomCategoryId
             };
             if (roomDto.Images != null)
             {
@@ -56,27 +48,104 @@ namespace Persistance.Concrets
             return new GetRoomDto
             {
                 Id = room.Id,
-                RoomName = room.RoomName,
                 Price = room.Price,
                 HotelId = room.HotelId,
-                
+                RoomCategoryId=room.CategoryNameId,
+                Images = room.RoomImages.Select(i => new GetImageRoomDto()
+                {
+                    Id = i.Id,
+                    Url = $"https://localhost:7046/api/Room/Images/{i.ImageName}"
+                }).ToList()
             };
         }
+        public async Task<GetRoomDto> GetByIdAsync(int id)
+        {
+            Room? room = await _dbcontext.Rooms.FirstOrDefaultAsync(h => h.Id == id) ??
+                 throw new NotFoundException();
+            return new GetRoomDto { Id = room.Id,RoomCategoryId=room.CategoryNameId, HotelId=room.HotelId, Images= (List<GetImageRoomDto>)room.RoomImages};
+        }
+        public async Task<GetRoomDto> UpdateAsync(EditRoomDto roomDto, int id)
+        {
+            Room? room = await _dbcontext.Rooms.FindAsync(id);
 
-        public Task<GetRoomDto> GetAllAsync()
+            if (room == null)
+            {
+                throw new NotFoundException("Room not found");
+            }
+            room.HotelId = roomDto.HotelId;
+            room.Price = roomDto.Price;
+            room.CategoryNameId = roomDto.RoomCategoryId;
+            await _dbcontext.SaveChangesAsync();
+
+            return new GetRoomDto
+            {
+                Id = room.Id,
+                HotelId = room.HotelId,
+                Price = room.Price,
+                RoomCategoryId= room.CategoryNameId
+            };
+        }
+        public Task<GetRoomDto> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
+       public async Task<List<GetRoomDto>> GetAllAsync()
+       {
+            List<Room>? rooms = await _dbcontext.Rooms.ToListAsync() ??
+               throw new NotFoundException();
+            List<GetRoomDto> getRoomDtos = rooms.Select(h => new GetRoomDto
+            {
+                Id = h.Id,
+                HotelId = h.HotelId,
+                Price = h.Price,
+                RoomCategoryId=h.CategoryNameId,
+                Images = h.RoomImages.Select(i => new GetImageRoomDto()
+                {
+                    Id = i.Id,
+                    Url = $"https://localhost:7046/api/Room/Images/{i.ImageName}"
+                }).ToList()
 
-        public Task<GetRoomDto> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
+            }).ToList();
+            return getRoomDtos;
         }
 
-        public Task<GetRoomDto> UpdateAsync(EditRoomDto roomDto, int id)
+        public async Task<List<GetImagesRoomDto>> UpdateRoomImagesAsync(EditImagesRoomDto editImagesRoom, int roomId)
         {
-            throw new NotImplementedException();
-        }
+            Room? room = await _dbcontext.Rooms.FindAsync(roomId);
+            if (room == null)
+            {
+                throw new NotFoundException("Room not found");
+            }
+            List<GetImagesRoomDto> updatedImages = new List<GetImagesRoomDto>();
 
+            foreach (IFormFile image in editImagesRoom.Images)
+            {
+                if (image.CheckFileSize(8000000))
+                {
+                    throw new FileTypeException("Check exception");
+                }
+                if (!image.CheckFileType("image/"))
+                {
+                    throw new FileSizeException();
+                }
+                string newFileName = await image.FileUploadAsync(_environment.WebRootPath, "ImagesRoom");
+                ImageRoom newImage = new ImageRoom
+                {
+                    ImageName = newFileName,
+                    RoomId= roomId,
+                    Path = Path.Combine(_environment.WebRootPath, "Images")
+                };
+                room.RoomImages.Add(newImage);
+                updatedImages.Add(new GetImagesRoomDto
+                { 
+                   ImageName= newFileName,
+                   roomId=roomId,
+                  Url = $"https://localhost:7046/api/Room/Images/{newImage.ImageName}"
+
+                });
+            }
+            await _dbcontext.SaveChangesAsync();
+            return updatedImages;
+        }
     }
 }

@@ -11,7 +11,6 @@ namespace Application.DTOs.ImageHotelDto
     {
         public int hotelId { get; set; }
         public string ImageName { get; set; }
-
         public string Url { get; set; } = null!;
 
 

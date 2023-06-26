@@ -11,7 +11,6 @@ namespace Domain.Entities
 {
     public  class Reservation:BaseAuditable
     {
-       
         public int RoomId { get; set; }
         public Room Room { get; set; }
         public DateTime Start { get; set; }
@@ -24,7 +23,7 @@ namespace Domain.Entities
        //{
        //if(!(item.start<dto.start&&item.end<=dto.start||item.start>=dto.end))
        //{
-                //return 404 return messsage artik hemin vaxta rezervasya olunub
+                //return 404 return messsage artiq hemin vaxta rezervasya olunub
        //}
        //}
        //} usteki ifin scobu

@@ -32,8 +32,8 @@ namespace Persistance.Concrets
                 
                 Name = postHotelDto.Name,
                 Rating = postHotelDto.Rating,
-
-
+                CityId=postHotelDto.CityId,
+               
             };
             if (hotel.Images != null)
             {
@@ -58,10 +58,14 @@ namespace Persistance.Concrets
                 Id = hotel.Id,
                 Name = hotel.Name,
                 Rating = hotel.Rating,
-                
+                CityId = hotel.CityId,
+                Images = hotel.Images.Select(i => new GetImageDto()
+                {
+                    Id = i.Id,
+                    Url = $"https://localhost:7046/api/Hotel/Images/{i.ImageName}"
+                }).ToList()
             };
         }
-
         public async Task<GetHotelDto> UpdateAsync(UpdateHotelDto updateHotelDto, int id)
         {
             Hotel? hotel = await _context.Hotels.FindAsync(id);
@@ -70,11 +74,10 @@ namespace Persistance.Concrets
             {
                 throw new NotFoundException("Hotel not found");
             }
-
             hotel.Name = updateHotelDto.Name;
             hotel.Rating = updateHotelDto.Rating;
-           
-
+            hotel.CityId= updateHotelDto.CityId;
+        
             await _context.SaveChangesAsync();
 
             return new GetHotelDto
@@ -82,7 +85,8 @@ namespace Persistance.Concrets
                 Id = hotel.Id,
                 Name = hotel.Name,
                 Rating = hotel.Rating,
-                
+                CityId = hotel.CityId,
+
             };
         }
 
@@ -90,11 +94,9 @@ namespace Persistance.Concrets
         {
             Hotel? hotel = await _context.Hotels.FirstOrDefaultAsync(h => h.Id == id) ??
                 throw new NotFoundException();
-            return new GetHotelDto { Id = hotel.Id, Name = hotel.Name, Rating = hotel.Rating };
-
+            return new GetHotelDto { Id = hotel.Id, Name = hotel.Name, Rating = hotel.Rating,Images= (List<GetImageDto>)hotel.Images };
         }
-
-        public async Task<GetHotelDto> GetAllAsync()
+        public async Task<List<GetHotelDto>> GetAllAsync()
         {
             List<Hotel>? hotels= await _context.Hotels.ToListAsync()??
                 throw new NotFoundException();
@@ -103,9 +105,16 @@ namespace Persistance.Concrets
                 Id = h.Id,
                 Name = h.Name,
                 Rating = h.Rating,
-               
+                CityId = h.CityId,
+                Images = h.Images.Select(i => new GetImageDto()
+                {
+                    Id = i.Id,
+                    Url = $"https://localhost:7046/api/Hotel/Images/{i.ImageName}"
+                }).ToList()
+                
+
             }).ToList();
-            return new GetHotelDto { };
+            return getHotelDtos;
         }
         public async Task <List<GetImageHotelDto>> UpdateImagesHotelAsync(UpdateImagesHotelDto updateImageHotelDto, int hotelId)
         {

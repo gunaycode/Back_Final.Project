@@ -6,19 +6,22 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.DTOs.HotelDto;
 
 namespace Application.DTOs.RoomDto
 {
     public class GetRoomDto
     {
         public int Id { get; set; }
-        public string RoomName { get; set; }
-        public int UsertId { get; set; }
-        public string City { get; set; }
+        public int RoomCategoryId { get; set; }
         public decimal Price { get; set; }
         public int HotelId { get; set; }
-        
-       
-       
+        public List<GetImageRoomDto> Images { get; set; }
+
+    }
+    public class GetImageRoomDto
+    {
+        public int Id { get; set; }
+        public string Url { get; set; }
     }
 }

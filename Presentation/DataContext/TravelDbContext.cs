@@ -30,6 +30,7 @@ namespace Persistance.DataContext
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<ImageRoom> ImagesRoom { get; set; }
+        public DbSet<RoomCategory> RoomCategories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

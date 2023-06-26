@@ -13,7 +13,6 @@ namespace Application.Validation.Room
     {
        public RoomValidator() 
        {
-            RuleFor(p => p.RoomName).MinimumLength(5).MaximumLength(30).NotNull().NotEmpty();
             RuleFor(p => p.Price)
               .NotEmpty()
               .NotNull();

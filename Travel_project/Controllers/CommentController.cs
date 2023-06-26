@@ -15,7 +15,7 @@ namespace Travel_project.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer",Roles = "SuperAdmin")]
     public class CommentController:ControllerBase
     {
 

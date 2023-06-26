@@ -51,7 +51,7 @@ namespace Travel_project.Controllers
         {
             try
             {
-                return StatusCode(200, await _context.Hotels.ToListAsync());
+                return StatusCode(200, await _context.Hotels.Include(i=>i.Images).ToListAsync());
             }
             catch (NotFoundException ex)
             {
@@ -64,7 +64,7 @@ namespace Travel_project.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
         {
-            Hotel? hotel = await _context.Hotels.FirstOrDefaultAsync(h => h.Id == id);
+            Hotel? hotel = await _context.Hotels.Include(i=>i.Images).FirstOrDefaultAsync(h => h.Id == id);
             if (hotel == null)
             {
                 return NotFound();
@@ -93,7 +93,7 @@ namespace Travel_project.Controllers
             return File(imageBytes, contentType);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}/Update")]
         public async Task<IActionResult> UpdateHotel(int id, [FromBody] UpdateHotelDto updateHotelDto)
         {
             try

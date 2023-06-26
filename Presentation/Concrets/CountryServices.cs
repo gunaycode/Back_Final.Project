@@ -75,7 +75,9 @@ namespace Persistance.Concrets
         {
             Country? country = await _context.Countries.FirstOrDefaultAsync(h => h.Id == id) ??
                throw new NotFoundException();
-            return new GetCountryDto { Id = country.Id, Name = country.Name };
+            return new GetCountryDto { Id = country.Id, Name = country.Name};
         }
+
+        
     }
 }

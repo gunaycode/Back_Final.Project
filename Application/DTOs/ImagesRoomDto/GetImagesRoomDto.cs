@@ -10,7 +10,6 @@ namespace Application.DTOs.ImageRoomDto
     {
         public int roomId { get; set; }
         public string ImageName { get; set; }
-
         public string Url { get; set; } = null!;
 
     }

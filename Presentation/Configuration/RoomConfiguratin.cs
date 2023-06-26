@@ -15,8 +15,7 @@ namespace Persistance.Configuration
         {
             builder.HasKey(c => c.Id);
 
-            builder.Property(r => r.RoomName)
-                .IsRequired();
+            builder.HasOne(c => c.CategoryName).WithMany(c => c.Rooms).HasForeignKey(c => c.CategoryNameId).OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(r => r.Price)
                 .IsRequired();
