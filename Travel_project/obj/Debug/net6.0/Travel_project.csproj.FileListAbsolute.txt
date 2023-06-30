@@ -266,3 +266,4 @@ C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\refint\Trav
 C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.pdb
 C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.genruntimeconfig.cache
 C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\ref\Travel_project.dll
+C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\Stripe.net.dll
