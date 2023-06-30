@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.CountryDto;
 using Application.DTOs.HotelDto;
+using Application.DTOs.SearchDto;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -31,7 +32,8 @@ namespace Persistance.DataContext
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<ImageRoom> ImagesRoom { get; set; }
         public DbSet<RoomCategory> RoomCategories { get; set; }
-
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<ImageBlog> ImagesBlog { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -17,6 +17,7 @@ namespace Application.DTOs.RoomDto
         public int HotelId { get; set; }
         public int RoomCategoryId { get; set; }
         public int CityId { get; set; }
+        public int Count { get; set; }
         public List<IFormFile> Images { get; set; }
   
     }

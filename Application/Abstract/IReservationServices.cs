@@ -11,8 +11,7 @@ namespace Application.Abstract
 {
     public interface IReservationServices
     {
-        Task <GetReservationDto> CreateAsync(CreateReservationDto reservationDto);
-        Task<GetReservationDto> UpdateAsync( EditReservationDto reservationDto ,int id);
+        Task <List<GetReservationDto>> CreateAsync(List<CreateReservationDto> reservationDto);
         Task<GetReservationDto> GetByIdAsync(int id);
         Task<GetReservationDto> GetAllAsync();
 

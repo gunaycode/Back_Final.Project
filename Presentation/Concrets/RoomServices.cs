@@ -25,7 +25,9 @@ namespace Persistance.Concrets
             {
                 Price = roomDto.Price,
                 HotelId = roomDto.HotelId,
-                CategoryNameId=roomDto.RoomCategoryId
+                CategoryNameId=roomDto.RoomCategoryId,
+                Count=roomDto.Count
+                
             };
             if (roomDto.Images != null)
             {
@@ -51,6 +53,7 @@ namespace Persistance.Concrets
                 Price = room.Price,
                 HotelId = room.HotelId,
                 RoomCategoryId=room.CategoryNameId,
+                Count=room.Count,
                 Images = room.RoomImages.Select(i => new GetImageRoomDto()
                 {
                     Id = i.Id,
@@ -75,6 +78,7 @@ namespace Persistance.Concrets
             room.HotelId = roomDto.HotelId;
             room.Price = roomDto.Price;
             room.CategoryNameId = roomDto.RoomCategoryId;
+            room.Count = roomDto.Count;
             await _dbcontext.SaveChangesAsync();
 
             return new GetRoomDto
@@ -82,7 +86,8 @@ namespace Persistance.Concrets
                 Id = room.Id,
                 HotelId = room.HotelId,
                 Price = room.Price,
-                RoomCategoryId= room.CategoryNameId
+                RoomCategoryId= room.CategoryNameId,
+                Count= roomDto.Count
             };
         }
         public Task<GetRoomDto> DeleteAsync(int id)
@@ -99,6 +104,7 @@ namespace Persistance.Concrets
                 HotelId = h.HotelId,
                 Price = h.Price,
                 RoomCategoryId=h.CategoryNameId,
+                Count=h.Count,
                 Images = h.RoomImages.Select(i => new GetImageRoomDto()
                 {
                     Id = i.Id,

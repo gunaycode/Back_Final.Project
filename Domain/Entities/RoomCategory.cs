@@ -10,7 +10,7 @@ namespace Domain.Entities
     public class RoomCategory:BaseAuditable
     {
         public string CategoryName { get; set; } = null!;
-        
         public ICollection<Room> Rooms { get; set; }
+        public ICollection<Reservation>Reservations { get; set; }
     }
 }

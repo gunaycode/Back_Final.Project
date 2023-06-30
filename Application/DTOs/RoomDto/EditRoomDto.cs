@@ -15,6 +15,7 @@ namespace Application.DTOs.RoomDto
         public string RoomName { get; set; }
         public int CityId { get; set; }
         public int RoomCategoryId { get; set; }
+        public int Count { get; set; }
         public decimal Price { get; set; }
         public int HotelId { get; set; }
         

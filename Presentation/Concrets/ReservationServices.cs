@@ -1,5 +1,7 @@
 ﻿using Application.Abstract;
 using Application.DTOs.ReservationDto;
+using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Persistance.DataContext;
 using System;
 using System.Collections.Generic;
@@ -12,10 +14,35 @@ namespace Persistance.Concrets
     public class ReservationServices : IReservationServices
     {
         private readonly TravelDbContext _dbcontext;
-        
-        public Task<GetReservationDto> CreateAsync(CreateReservationDto reservationDto)
+        public ReservationServices(TravelDbContext context)
         {
-            throw new NotImplementedException();
+            _dbcontext = context; 
+        }
+        public async Task<List<GetReservationDto>> CreateAsync(List<CreateReservationDto> reservationDto)
+        {
+            List<Reservation> reservationsCreate = reservationDto.Select(reservationDto => new Reservation
+            {
+                UserId = reservationDto.UserId,
+                RoomCategoryId=reservationDto.RoomCategoryId,
+                Date = reservationDto.Date,
+                Count=reservationDto.Count,
+                RoomId=reservationDto.RoomId,
+            }).ToList();
+
+            _dbcontext.Reservations.AddRange(reservationsCreate);
+            await _dbcontext.SaveChangesAsync();
+
+            List<GetReservationDto> createdReservations = reservationsCreate.Select(reservation => new GetReservationDto
+            {
+                Id = reservation.Id,
+                UserId = reservation.UserId,
+                RoomCategoryId = reservation.RoomCategoryId,
+                Count=reservation.Count,
+                Date = reservation.Date,
+                RoomId=reservation.RoomId,
+            }).ToList();
+
+            return createdReservations;
         }
 
         public Task<GetReservationDto> GetAllAsync()
@@ -28,9 +55,5 @@ namespace Persistance.Concrets
             throw new NotImplementedException();
         }
 
-        public Task<GetReservationDto> UpdateAsync(EditReservationDto reservationDto, int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

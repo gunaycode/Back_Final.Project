@@ -15,21 +15,29 @@ namespace Persistance.Configuration
         {
             builder.ToTable("Reservations");
             builder.HasKey(c => c.Id);
-            builder.Property(r => r.Start)
-                .IsRequired();
 
-            builder.Property(r => r.End)
+            builder.Property(d=>d.Date)
                 .IsRequired();
 
             builder.HasOne(r => r.Room)
                 .WithMany(room => room.Reservations)
                 .HasForeignKey(r => r.RoomId)
                 .IsRequired();
+            
 
             builder.HasOne(r => r.User)
                 .WithMany(user => user.Reservations)
                 .HasForeignKey(r => r.UserId)
                 .IsRequired();
+
+            builder.HasOne(r => r.RoomCategory)
+            .WithMany(category => category.Reservations)
+            .HasForeignKey(r => r.RoomCategoryId)
+            .IsRequired();
+
+            builder.Property(r => r.Count)
+                .IsRequired();
+
         }
     }
 }

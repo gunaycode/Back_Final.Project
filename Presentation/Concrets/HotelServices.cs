@@ -29,11 +29,15 @@ namespace Persistance.Concrets
         {
             Hotel hotel = new Hotel
             {
-                
                 Name = postHotelDto.Name,
                 Rating = postHotelDto.Rating,
                 CityId=postHotelDto.CityId,
-               
+                Parking=postHotelDto.Parking,
+                Pet=postHotelDto.Pet,
+                Pool=postHotelDto.Pool,
+                Breakfast=postHotelDto.Breakfast,
+                Location=postHotelDto.Location,
+                WiFi=postHotelDto.WiFi, 
             };
             if (hotel.Images != null)
             {
@@ -59,6 +63,12 @@ namespace Persistance.Concrets
                 Name = hotel.Name,
                 Rating = hotel.Rating,
                 CityId = hotel.CityId,
+                Parking=hotel.Parking,
+                Pet=hotel.Pet,
+                Pool=hotel.Pool,
+                Location=hotel.Location,
+                Breakfast=hotel.Breakfast,
+                WiFi=hotel.WiFi,
                 Images = hotel.Images.Select(i => new GetImageDto()
                 {
                     Id = i.Id,
@@ -86,6 +96,12 @@ namespace Persistance.Concrets
                 Name = hotel.Name,
                 Rating = hotel.Rating,
                 CityId = hotel.CityId,
+                Parking= hotel.Parking,
+                Pet= hotel.Pet,
+                Breakfast= hotel.Breakfast,
+                Location= hotel.Location,
+                WiFi=hotel.WiFi,
+                Pool=hotel.Pool,
 
             };
         }
@@ -106,6 +122,12 @@ namespace Persistance.Concrets
                 Name = h.Name,
                 Rating = h.Rating,
                 CityId = h.CityId,
+                WiFi=h.WiFi,
+                Parking=h.Parking,
+                Pet=h.Pet,
+                Pool=h.Pool,
+                Breakfast=h.Breakfast,
+                Location=h.Location,
                 Images = h.Images.Select(i => new GetImageDto()
                 {
                     Id = i.Id,

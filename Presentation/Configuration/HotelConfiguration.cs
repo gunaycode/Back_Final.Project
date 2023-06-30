@@ -22,7 +22,6 @@ namespace Persistance.Configuration
                 .HasMaxLength(100);
             builder.Property(h => h.Rating).IsRequired();
             
-
             builder.HasOne(h => h.City)
                 .WithMany(c => c.Hotels)
                 .HasForeignKey(h=>h.CityId)
@@ -31,6 +30,24 @@ namespace Persistance.Configuration
             builder.HasMany(h=>h.Rooms)
              .WithOne(r => r.Hotel)
             .HasForeignKey(r => r.HotelId);
+
+            builder.Property(h => h.WiFi)
+           .IsRequired();
+
+            builder.Property(h => h.Pool)
+                .IsRequired();
+
+            builder.Property(h => h.Parking)
+                .IsRequired();
+
+            builder.Property(h => h.Location)
+                .IsRequired();
+
+            builder.Property(h => h.Breakfast)
+                .IsRequired();
+
+            builder.Property(h => h.Pet)
+                .IsRequired();
         }
 
 

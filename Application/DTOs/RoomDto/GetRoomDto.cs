@@ -16,6 +16,7 @@ namespace Application.DTOs.RoomDto
         public int RoomCategoryId { get; set; }
         public decimal Price { get; set; }
         public int HotelId { get; set; }
+        public int Count { get; set; }
         public List<GetImageRoomDto> Images { get; set; }
 
     }

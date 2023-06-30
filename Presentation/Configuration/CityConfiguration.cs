@@ -24,6 +24,7 @@ namespace Persistance.Configuration
                 .WithMany()
                 .HasForeignKey(c => c.CountryId)
                 .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\ImagesRoom\\05e9775e-e810-4a0f-a0c2-778482034527Screenshot 2023-05-09 113144.png",
+      "PackagePath": "staticwebassets\\ImagesRoom\\05e9775e-e810-4a0f-a0c2-778482034527Screenshot 2023-05-09 113144.png"
+    },
+    {
       "Id": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\ImagesRoom\\0a17b0cd-0133-4c30-9306-8953baa28d0bScreenshot 2023-05-09 113243.png",
       "PackagePath": "staticwebassets\\ImagesRoom\\0a17b0cd-0133-4c30-9306-8953baa28d0bScreenshot 2023-05-09 113243.png"
     },
@@ -17,6 +21,18 @@
       "PackagePath": "staticwebassets\\ImagesRoom\\e0351cb6-1c20-46a8-b4d3-003fbed637c4Screenshot 2023-05-09 113217.png"
     },
     {
+      "Id": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\Images\\3391d5c6-40aa-43f8-8e1e-3dfed7a16daaScreenshot 2023-05-09 113144.png",
+      "PackagePath": "staticwebassets\\Images\\3391d5c6-40aa-43f8-8e1e-3dfed7a16daaScreenshot 2023-05-09 113144.png"
+    },
+    {
+      "Id": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\Images\\3482ef80-f0d1-4698-a070-2fb710641e51Screenshot 2023-05-09 113243.png",
+      "PackagePath": "staticwebassets\\Images\\3482ef80-f0d1-4698-a070-2fb710641e51Screenshot 2023-05-09 113243.png"
+    },
+    {
+      "Id": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\Images\\5a29ef65-4b2e-4da4-95f1-94b5e95a3e65Screenshot 2023-05-09 113217.png",
+      "PackagePath": "staticwebassets\\Images\\5a29ef65-4b2e-4da4-95f1-94b5e95a3e65Screenshot 2023-05-09 113217.png"
+    },
+    {
       "Id": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\Images\\5c3e32af-951c-4542-80ac-0acc511d0850Screenshot 2023-05-09 113144.png",
       "PackagePath": "staticwebassets\\Images\\5c3e32af-951c-4542-80ac-0acc511d0850Screenshot 2023-05-09 113144.png"
     },
@@ -27,6 +43,18 @@
     {
       "Id": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\Images\\87b122e1-7240-4430-a148-0a566eb2ddf9Screenshot 2023-05-08 143411.png",
       "PackagePath": "staticwebassets\\Images\\87b122e1-7240-4430-a148-0a566eb2ddf9Screenshot 2023-05-08 143411.png"
+    },
+    {
+      "Id": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\Images\\a0606a4d-8d75-4fcc-b6b3-360e127088dbScreenshot 2023-05-09 113144.png",
+      "PackagePath": "staticwebassets\\Images\\a0606a4d-8d75-4fcc-b6b3-360e127088dbScreenshot 2023-05-09 113144.png"
+    },
+    {
+      "Id": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\Images\\b4f8d2b2-8b58-49b4-9528-39562a70def9Screenshot 2023-05-09 113217.png",
+      "PackagePath": "staticwebassets\\Images\\b4f8d2b2-8b58-49b4-9528-39562a70def9Screenshot 2023-05-09 113217.png"
+    },
+    {
+      "Id": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\Images\\c5a0df84-4072-4465-ae9d-872525258afbScreenshot 2023-05-08 143411.png",
+      "PackagePath": "staticwebassets\\Images\\c5a0df84-4072-4465-ae9d-872525258afbScreenshot 2023-05-08 143411.png"
     },
     {
       "Id": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\Images\\e7e252f7-a09d-47f3-b688-e31ce383f01cScreenshot 2023-05-08 143411.png",

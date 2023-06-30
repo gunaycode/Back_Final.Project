@@ -13,6 +13,7 @@ namespace Persistance.Configuration
     {
         public void Configure(EntityTypeBuilder<RoomCategory> builder)
         {
+
             builder.HasKey(c => c.Id);
             builder.HasMany(c=>c.Rooms)
                 .WithOne(c=>c.CategoryName)

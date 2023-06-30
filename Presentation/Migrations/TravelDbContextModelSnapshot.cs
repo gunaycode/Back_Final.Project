@@ -22,6 +22,54 @@ namespace Persistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Domain.Entities.Blog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(600)
+                        .HasColumnType("nvarchar(600)");
+
+                    b.Property<bool>("IsActived")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TextAll")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("UpdateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Blogs", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.City", b =>
                 {
                     b.Property<int>("Id")
@@ -183,6 +231,9 @@ namespace Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("Breakfast")
+                        .HasColumnType("bit");
+
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
@@ -198,10 +249,23 @@ namespace Persistance.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("Parking")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Pet")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Pool")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
@@ -212,11 +276,59 @@ namespace Persistance.Migrations
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("WiFi")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
 
                     b.ToTable("Hotels", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.ImageBlog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasMaxLength(1100)
+                        .HasColumnType("nvarchar(1100)");
+
+                    b.Property<bool>("IsActived")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpdateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("ImagesBlog");
                 });
 
             modelBuilder.Entity("Domain.Entities.ImageHotel", b =>
@@ -317,13 +429,16 @@ namespace Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("End")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActived")
@@ -332,11 +447,11 @@ namespace Persistance.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("RoomId")
+                    b.Property<int>("RoomCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Start")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
@@ -348,6 +463,8 @@ namespace Persistance.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoomCategoryId");
 
                     b.HasIndex("RoomId");
 
@@ -365,6 +482,10 @@ namespace Persistance.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CategoryNameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasMaxLength(4)
                         .HasColumnType("int");
 
                     b.Property<string>("CreateBy")
@@ -390,9 +511,6 @@ namespace Persistance.Migrations
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("UsertId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -707,6 +825,15 @@ namespace Persistance.Migrations
                     b.Navigation("City");
                 });
 
+            modelBuilder.Entity("Domain.Entities.ImageBlog", b =>
+                {
+                    b.HasOne("Domain.Entities.Blog", null)
+                        .WithMany("Images")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.Entities.ImageHotel", b =>
                 {
                     b.HasOne("Domain.Entities.Hotel", null)
@@ -729,6 +856,12 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Domain.Entities.Reservation", b =>
                 {
+                    b.HasOne("Domain.Entities.RoomCategory", "RoomCategory")
+                        .WithMany("Reservations")
+                        .HasForeignKey("RoomCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.Room", "Room")
                         .WithMany("Reservations")
                         .HasForeignKey("RoomId")
@@ -742,6 +875,8 @@ namespace Persistance.Migrations
                         .IsRequired();
 
                     b.Navigation("Room");
+
+                    b.Navigation("RoomCategory");
 
                     b.Navigation("User");
                 });
@@ -816,6 +951,11 @@ namespace Persistance.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Entities.Blog", b =>
+                {
+                    b.Navigation("Images");
+                });
+
             modelBuilder.Entity("Domain.Entities.City", b =>
                 {
                     b.Navigation("Hotels");
@@ -847,6 +987,8 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Domain.Entities.RoomCategory", b =>
                 {
+                    b.Navigation("Reservations");
+
                     b.Navigation("Rooms");
                 });
 

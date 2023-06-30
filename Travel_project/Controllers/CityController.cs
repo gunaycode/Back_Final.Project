@@ -23,7 +23,7 @@ namespace Travel_project.Controllers
         }
 
         [HttpPost]
-    [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         public async Task<IActionResult> Create([FromForm] PostCityDto postCityDto)
         {
             try
