@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.SearchDto;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Application.Abstract
 {
     public interface ISearchResultServices
     {
-        Task<List<SearchResult>> Search(int count, string city, DateTime date);
+        Task<List<Hotel>> Search(int? count, int? city, DateTime? date);
     }
 }

@@ -12,42 +12,51 @@ namespace Travel_project.Controllers
         [HttpPost]
         public async Task<IActionResult> Payment(AddStripeCard stripeCard)
         {
-            StripeConfiguration.ApiKey = "sk_test_51NOjqHBLzldeeaXproeaOo7Mect5FIuOibGZBk4j2bf5zaPUkWtoGnSaeVKERexniBfBPm3Tlk04NZZfhAHNjivE001zMGn9YN";
-
-            TokenCreateOptions tokenOptions = new TokenCreateOptions
+            try
             {
-                Card = new TokenCardOptions
+                StripeConfiguration.ApiKey = "sk_test_51MsRiLGVwWWuLvrTdJpuEObgwZOdlfB6mCymd4Nro1JqeJMbSNphwHY85eHbaq54jGKS2i8fVBWJiJwjRoOQie6B00sTkyhmz1";
+
+                TokenCreateOptions tokenOptions = new TokenCreateOptions
                 {
-                    Name = stripeCard.Name,
-                    Number = stripeCard.CardNumber,
-                    ExpYear = stripeCard.ExpirationYear,
-                    ExpMonth = stripeCard.ExpirationMonth,
-                    Cvc = stripeCard.Cvc
+                    Card = new TokenCardOptions
+                    {
+                        Name = stripeCard.Name,
+                        Number = stripeCard.CardNumber,
+                        ExpYear = stripeCard.ExpirationYear,
+                        ExpMonth = stripeCard.ExpirationMonth,
+                        Cvc = stripeCard.Cvc
+                    }
+                };
+
+                var serviceToken = new TokenService();
+                Token stripeToken = await serviceToken.CreateAsync(tokenOptions);
+
+                var options = new ChargeCreateOptions
+                {
+                    Amount = (long)stripeCard.amount * 100,
+                    Currency = "usd",
+                    Description = "test",
+                    Source = stripeToken.Id
+                };
+
+                var service = new ChargeService();
+                Charge charge = await service.CreateAsync(options);
+
+                if (charge.Paid)
+                {
+                    return StatusCode(200);
                 }
-            };
-
-            var serviceToken = new TokenService();
-            Token stripeToken = await serviceToken.CreateAsync(tokenOptions);
-
-            var options = new ChargeCreateOptions
-            {
-                Amount = (long)stripeCard.amount * 100,
-                Currency = "usd",
-                Description = "test",
-                Source = stripeToken.Id
-            };
-
-            var service = new ChargeService();
-            Charge charge = await service.CreateAsync(options);
-
-            if (charge.Paid)
-            {
-                return StatusCode(200);
+                else
+                {
+                    return StatusCode(500);
+                }
             }
-            else
+            catch (Exception e)
             {
-                return StatusCode(500);
+                await Console.Out.WriteLineAsync(e.Message);
+                throw;
             }
+       
 
 
 

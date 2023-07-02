@@ -1,5 +1,7 @@
 ﻿using Application.DTOs.Filter;
 using Application.DTOs.SearchDto;
+using Domain.Entities;
+using Domain.Entities.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +11,7 @@ using System.Threading.Tasks;
 namespace Application.Abstract
 {
     public interface IFilterResultServices
-    {
-       
-        Task<List<FilterResult>> Filter(int rating, int price, bool wifi, string location, bool pet, bool pool, bool parking, bool breakfast);
+    { 
+        Task<List<Hotel>> Filter(int? rating, decimal? MinPrice,decimal? MaxPrice ,bool? wifi, HotelLocation? location, bool? pet, bool? pool, bool? parking, bool? breakfast);
     }
 }

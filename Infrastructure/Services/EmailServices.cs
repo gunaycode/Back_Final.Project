@@ -8,6 +8,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Application.DTOs.MailSender;
 
 namespace Infrastructure.Services
 {
@@ -40,6 +41,10 @@ namespace Infrastructure.Services
             _smtpClient.Send(newMessage);
         }
 
+        public Task SendMessage(MailRequestDto mailRequestDto)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

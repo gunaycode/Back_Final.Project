@@ -11,10 +11,11 @@
           "Infrastructure": "1.0.0",
           "JWT": "10.0.2",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.12",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.19",
           "Microsoft.EntityFrameworkCore.Design": "6.0.12",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.14",
           "Persistance": "1.0.0",
-          "Stripe.net": "41.22.0",
+          "Stripe.net": "41.12.0",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
         "runtime": {
@@ -732,6 +733,31 @@
           }
         }
       },
+      "Microsoft.AspNetCore.JsonPatch/6.0.19": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "Newtonsoft.Json": "13.0.2"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.JsonPatch.dll": {
+            "assemblyVersion": "6.0.19.0",
+            "fileVersion": "6.0.1923.31806"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson/6.0.19": {
+        "dependencies": {
+          "Microsoft.AspNetCore.JsonPatch": "6.0.19",
+          "Newtonsoft.Json": "13.0.2",
+          "Newtonsoft.Json.Bson": "1.0.2"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {
+            "assemblyVersion": "6.0.19.0",
+            "fileVersion": "6.0.1923.31806"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Razor.Language/6.0.0": {
         "runtime": {
           "lib/netstandard2.0/Microsoft.AspNetCore.Razor.Language.dll": {
@@ -1195,7 +1221,7 @@
           }
         }
       },
-      "Microsoft.CSharp/4.5.0": {},
+      "Microsoft.CSharp/4.7.0": {},
       "Microsoft.Data.SqlClient/2.1.4": {
         "dependencies": {
           "Microsoft.Data.SqlClient.SNI.runtime": "2.1.1",
@@ -1518,7 +1544,7 @@
       },
       "Microsoft.IdentityModel.Tokens/6.10.0": {
         "dependencies": {
-          "Microsoft.CSharp": "4.5.0",
+          "Microsoft.CSharp": "4.7.0",
           "Microsoft.IdentityModel.Logging": "6.10.0",
           "System.Security.Cryptography.Cng": "5.0.0"
         },
@@ -1746,6 +1772,17 @@
           }
         }
       },
+      "Newtonsoft.Json.Bson/1.0.2": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.2.22727"
+          }
+        }
+      },
       "NuGet.Common/6.3.1": {
         "dependencies": {
           "NuGet.Frameworks": "6.3.1"
@@ -1895,15 +1932,15 @@
       "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
-      "Stripe.net/41.22.0": {
+      "Stripe.net/41.12.0": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.2",
           "System.Configuration.ConfigurationManager": "6.0.0"
         },
         "runtime": {
           "lib/net6.0/Stripe.net.dll": {
-            "assemblyVersion": "41.22.0.0",
-            "fileVersion": "41.22.0.0"
+            "assemblyVersion": "41.12.0.0",
+            "fileVersion": "41.12.0.0"
           }
         }
       },
@@ -3268,6 +3305,20 @@
       "path": "microsoft.aspnetcore.identity.entityframeworkcore/6.0.12",
       "hashPath": "microsoft.aspnetcore.identity.entityframeworkcore.6.0.12.nupkg.sha512"
     },
+    "Microsoft.AspNetCore.JsonPatch/6.0.19": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TvBoWIX1kB5i4yHhtS4zWbD6O1X3dzEb3d79oJ+DxQm5iFkAX02SIcx60lPd+emkbFv1AZjrXP+dd+7Urtbrnw==",
+      "path": "microsoft.aspnetcore.jsonpatch/6.0.19",
+      "hashPath": "microsoft.aspnetcore.jsonpatch.6.0.19.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Mvc.NewtonsoftJson/6.0.19": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OvVtiyawqio8BtX2SyqWraSvzn1pvpTJ6FMV5hmg1E62leAN6+t68vMfp6lE+G4WWyanHeOmhaTvm+7XM/t91g==",
+      "path": "microsoft.aspnetcore.mvc.newtonsoftjson/6.0.19",
+      "hashPath": "microsoft.aspnetcore.mvc.newtonsoftjson.6.0.19.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Razor.Language/6.0.0": {
       "type": "package",
       "serviceable": true,
@@ -3373,12 +3424,12 @@
       "path": "microsoft.codeanalysis.workspaces.common/4.0.0",
       "hashPath": "microsoft.codeanalysis.workspaces.common.4.0.0.nupkg.sha512"
     },
-    "Microsoft.CSharp/4.5.0": {
+    "Microsoft.CSharp/4.7.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
-      "path": "microsoft.csharp/4.5.0",
-      "hashPath": "microsoft.csharp.4.5.0.nupkg.sha512"
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
     "Microsoft.Data.SqlClient/2.1.4": {
       "type": "package",
@@ -3758,6 +3809,13 @@
       "path": "newtonsoft.json/13.0.2",
       "hashPath": "newtonsoft.json.13.0.2.nupkg.sha512"
     },
+    "Newtonsoft.Json.Bson/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QYFyxhaABwmq3p/21VrZNYvCg3DaEoN/wUuw5nmfAf0X3HLjgupwhkEWdgfb9nvGAUIv3osmZoD3kKl4jxEmYQ==",
+      "path": "newtonsoft.json.bson/1.0.2",
+      "hashPath": "newtonsoft.json.bson.1.0.2.nupkg.sha512"
+    },
     "NuGet.Common/6.3.1": {
       "type": "package",
       "serviceable": true,
@@ -3933,12 +3991,12 @@
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
     },
-    "Stripe.net/41.22.0": {
+    "Stripe.net/41.12.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-hdsW0vQRKjBUYECqBPPzHUFqg7WMUK7HwTReMqaezLAfF8m51swF7pFOtNolATSlxJVqu1zTSiZRN8mZp/5gWQ==",
-      "path": "stripe.net/41.22.0",
-      "hashPath": "stripe.net.41.22.0.nupkg.sha512"
+      "sha512": "sha512-HM0e++0MVO4R/5QfsZUysx3bhPK/KzEuAuwL3VNhnzRhYXKrcUaOI7ZQzDS8XWXCnhPuXB9V3YolN6XFfoxF3A==",
+      "path": "stripe.net/41.12.0",
+      "hashPath": "stripe.net.41.12.0.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.2.3": {
       "type": "package",

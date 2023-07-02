@@ -9,6 +9,7 @@ namespace Application.DTOs.CountryDto
 {
     public class PostCountryDto
     {
+        
         public string Name { get; set; } = null!;
         
     }

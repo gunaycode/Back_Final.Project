@@ -1,6 +1,8 @@
 ﻿using Application.Abstract;
 using Application.DTOs.Filter;
 using Application.DTOs.SearchDto;
+using Domain.Entities;
+using Domain.Entities.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Persistance.Migrations;
 
@@ -16,11 +18,11 @@ namespace Travel_project.Controllers
             _filterResult = filterResult;
         }
         [HttpGet("filter")]
-        public async Task<IActionResult>Filter([FromQuery] int rating, int price, bool wifi, string location, bool breakfast, bool pet, bool pool, bool parking )
+        public async Task<IActionResult>Filter([FromQuery] int rating, int minPrice,int maxPrice, bool wifi, HotelLocation location, bool breakfast, bool pet, bool pool, bool parking )
         {
             try
             {
-                List<FilterResult> filterResults = await _filterResult.Filter(rating, price, wifi, location, pet, pool, parking, breakfast);
+                List<Hotel> filterResults = await _filterResult.Filter(rating, minPrice, maxPrice, wifi, location, pet, pool, parking, breakfast);
 
                 if (filterResults.Count > 0)
                 {

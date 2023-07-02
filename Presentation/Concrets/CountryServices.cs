@@ -26,11 +26,12 @@ namespace Persistance.Concrets
         {
             Country country = new Country
             {
+               
                 Name = postCountryDto.Name,
             };
             _context.Countries.Add(country);
             await _context.SaveChangesAsync();
-            return new GetCountryDto { Name = country.Name, };
+            return new GetCountryDto { Name = country.Name,Id=country.Id };
         }
 
         public async Task<GetCountryDto> GetAllAsync()

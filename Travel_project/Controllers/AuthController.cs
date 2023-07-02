@@ -1,11 +1,16 @@
-﻿using Application.DTOs.AuthDto;
+﻿using Application.Abstract;
+using Application.DTOs.AuthDto;
+using Application.DTOs.MailSender;
 using Domain.Entities;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using NuGet.Common;
+using Persistance.DataContext;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 
@@ -17,11 +22,14 @@ namespace Travel_project.Controllers
     {
         readonly UserManager<User> _userManager;
         readonly IConfiguration _configuration;
-
-        public AuthController(UserManager<User> userManager, IConfiguration configuration)
+        readonly RoleManager<Role> _roleManager;
+        readonly IEmailServices _emailService;
+        public AuthController(UserManager<User> userManager, IConfiguration configuration,RoleManager<Role> roleManager, IEmailServices services)
         {
             _userManager = userManager;
             _configuration = configuration;
+            _roleManager = roleManager;
+            _emailService = services;
         }
 
         [HttpPost("register")]
@@ -40,6 +48,9 @@ namespace Travel_project.Controllers
             {
                 return BadRequest(result.Errors);
             }
+            string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            string? link = Url.Action("ConfirmUser", "Account", new { email = user.Email, token = token }, HttpContext.Request.Scheme);
+            _emailService.SendMessage(token, "Confirm", user.Email);
             return Ok(new
             {
                 user.Name,
@@ -87,6 +98,54 @@ namespace Travel_project.Controllers
 
             return Ok(new { Token = encodedToken });
         }
+
+        [HttpPost("ConfirmUser")]
+        public async Task<IActionResult> ConfirmUser(string token, string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return BadRequest("Invalid email.");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (!result.Succeeded)
+            {
+                return BadRequest("Email confirmation failed.");
+            }
+
+            return Ok("Email confirmed successfully.");
+        }
+
+        [HttpPost("forgetPassword")]
+        public async Task<IActionResult> ForgotPassword([FromForm]ForgetPasswordDto forgotPassword)
+        {
+            var user = await _userManager.FindByEmailAsync(forgotPassword.Email);
+            if (user is null)
+                return BadRequest("User not found.");
+
+            string token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            string link = Url.Action("ResetPassword", "Account", new { userId = user.Id, token });
+            await _emailService.SendMessage(new MailRequestDto { ToEmail = forgotPassword.Email, Subject = "ResetPassword", Body = $"<a href={link}/a>" });
+            return Ok(link);
+        }
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
+        {
+            var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
+            if (user == null)
+            {
+
+                return NotFound();
+            }
+            var resetPasswordResult = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.NewPassword);
+            if (!resetPasswordResult.Succeeded)
+            {
+                return BadRequest(resetPasswordResult.Errors);
+            }
+            return Ok();
+        }
+
 
     }
 }

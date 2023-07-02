@@ -1,6 +1,7 @@
 ﻿using Application.Abstract;
 using Application.DTOs.HotelDto;
 using Application.DTOs.ImageHotelDto;
+using Application.DTOs.SearchDto;
 using Domain.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,8 +36,8 @@ namespace Persistance.Concrets
                 Parking=postHotelDto.Parking,
                 Pet=postHotelDto.Pet,
                 Pool=postHotelDto.Pool,
-                Breakfast=postHotelDto.Breakfast,
                 Location=postHotelDto.Location,
+                Breakfast=postHotelDto.Breakfast,
                 WiFi=postHotelDto.WiFi, 
             };
             if (hotel.Images != null)
@@ -66,7 +67,7 @@ namespace Persistance.Concrets
                 Parking=hotel.Parking,
                 Pet=hotel.Pet,
                 Pool=hotel.Pool,
-                Location=hotel.Location,
+                Location = postHotelDto.Location,
                 Breakfast=hotel.Breakfast,
                 WiFi=hotel.WiFi,
                 Images = hotel.Images.Select(i => new GetImageDto()
@@ -87,7 +88,12 @@ namespace Persistance.Concrets
             hotel.Name = updateHotelDto.Name;
             hotel.Rating = updateHotelDto.Rating;
             hotel.CityId= updateHotelDto.CityId;
-        
+            hotel.Breakfast= updateHotelDto.Breakfast;
+            hotel.Parking= updateHotelDto.Parking;
+            hotel.Location= updateHotelDto.Location;
+            hotel.Pet= updateHotelDto.Pet;
+            hotel.Pool= updateHotelDto.Pool;
+            hotel.WiFi= updateHotelDto.WiFi;
             await _context.SaveChangesAsync();
 
             return new GetHotelDto
@@ -105,7 +111,6 @@ namespace Persistance.Concrets
 
             };
         }
-
         public async Task<GetHotelDto> GetByIdAsync(int id)
         {
             Hotel? hotel = await _context.Hotels.FirstOrDefaultAsync(h => h.Id == id) ??
@@ -127,7 +132,8 @@ namespace Persistance.Concrets
                 Pet=h.Pet,
                 Pool=h.Pool,
                 Breakfast=h.Breakfast,
-                Location=h.Location,
+                Location=h.Location,    
+              
                 Images = h.Images.Select(i => new GetImageDto()
                 {
                     Id = i.Id,
@@ -177,8 +183,7 @@ namespace Persistance.Concrets
             return updatedImages;
 
         }
-
-        
     }
+
 
 }

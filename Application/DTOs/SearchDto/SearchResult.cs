@@ -10,7 +10,7 @@ namespace Application.DTOs.SearchDto
     public class SearchResult
     {
         public int Count { get; set; }
-        public string City { get; set; }
+        public int CityId { get; set; }
         public DateTime Date { get; set; }
 
     }

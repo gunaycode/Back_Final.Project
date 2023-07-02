@@ -23,13 +23,12 @@ namespace Travel_project.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        //[Authorize(Roles = "SuperAdmin,Admin")]
         public async Task<IActionResult> Create([FromForm] PostCityDto postCityDto)
         {
             try
             {
                 return Ok(await _cityServices.CreateAsync(postCityDto));
-
             }
             catch (NotFoundException ex)
             {
@@ -74,7 +73,7 @@ namespace Travel_project.Controllers
             }
         }
 
-        [HttpPost("/api/Cities")]
+        [HttpGet("/api/Cities")]
         public async Task<IActionResult> GettAll()
         {
             try

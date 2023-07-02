@@ -1,5 +1,6 @@
 ﻿using Application.Abstract;
 using Application.DTOs.SearchDto;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataContext;
 using System;
@@ -10,28 +11,36 @@ using System.Threading.Tasks;
 
 namespace Persistance.Concrets
 {
-    public class SearchServices:ISearchResultServices
+    public class SearchServices : ISearchResultServices
     {
-        private List<SearchResult> _searchResults;
-
-        public SearchServices()
+        private readonly TravelDbContext _travelDb;
+        public SearchServices(TravelDbContext travelDb)
         {
-            _searchResults = new List<SearchResult>();
+            _travelDb = travelDb;
         }
-
-        public async Task<List<SearchResult>> Search(int count, string city, DateTime date)
+        public async Task<List<Hotel>> Search(int? count, int? city, DateTime? date)
         {
-            List<SearchResult> results = _searchResults
-             .Where(result => result.Count == count && result.City == city && result.Date.Date == date.Date)
-             .ToList();
-            List<SearchResult> searchResultDtos = results.Select(result => new SearchResult
+            var query = _travelDb.Hotels
+               .Include(h => h.City)
+               .Include(h => h.Rooms)
+               .ThenInclude(h => h.Reservations);
+            if (city != null)
             {
-                City = result.City,
-                Date = result.Date,
-                Count = result.Count
-            }).ToList();
+                query.Where(h => h.CityId == city);
+            }
+            if (count != null)
+            {
+                query.Where(h => h.Rooms.Any(r => r.Count == count));
+            }
+            if (date != null)
+            {
+                query.Where(h => h.Rooms.Any(r => r.Reservations.Any(re => re.Date != date)));
+            }
+            List<Hotel> hotels = await query.ToListAsync();
+            return hotels;
 
-            return searchResultDtos;
         }
+
     }
+
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain.Entities.Enum;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Application.DTOs.HotelDto
         public bool WiFi { get; set; }
         public bool Pool { get; set; }
         public bool Parking { get; set; }
-        public string Location { get; set; }
+        public HotelLocation Location { get; set; }
         public bool Breakfast { get; set; }
         public bool Pet { get; set; }
         public List<IFormFile> Images { get; set; }

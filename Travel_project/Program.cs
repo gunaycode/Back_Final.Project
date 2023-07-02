@@ -15,7 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+ options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -44,6 +46,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ClockSkew = TimeSpan.FromSeconds(0)
     };
 });
+
+builder.Services.AddScoped<IFilterResultServices, FilterServices>();
 builder.Services.AddScoped<IHotelServices,HotelServices>();
 builder.Services.AddScoped<ICurrentServices,CurrentUserServices>();
 builder.Services.AddScoped<ICommentServices, CommentServices>(); 
@@ -54,9 +58,9 @@ builder.Services.AddScoped<IEmailServices, EmailServices>();
 builder.Services.AddScoped<ICountryServices, CountryServices>();  
 builder.Services.AddScoped<ICityServices, CityServices>();
 builder.Services.AddScoped<IRoomCategoryServices,RoomCategoryServices>();
-builder.Services.AddScoped<ISearchResultServices, SearchServices>();
 builder.Services.AddScoped<IBlogServices, BlogServices>();  
-builder.Services.AddScoped<IFilterResultServices, FilterServices>();    
+builder.Services.AddScoped<ISearchResultServices, SearchServices>();    
+   
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo()
