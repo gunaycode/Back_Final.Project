@@ -10,6 +10,7 @@ using Persistance.Concrets;
 using Persistance.DataContext;
 using System;
 using System.Text;
+using Travel_project.BackGroundServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,8 +60,9 @@ builder.Services.AddScoped<ICountryServices, CountryServices>();
 builder.Services.AddScoped<ICityServices, CityServices>();
 builder.Services.AddScoped<IRoomCategoryServices,RoomCategoryServices>();
 builder.Services.AddScoped<IBlogServices, BlogServices>();  
-builder.Services.AddScoped<ISearchResultServices, SearchServices>();    
-   
+builder.Services.AddScoped<ISearchResultServices, SearchServices>();
+builder.Services.AddHostedService<DateTimeLogWriter>();
+
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo()

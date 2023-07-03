@@ -1,3 +1,8 @@
+C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.AssemblyReference.cache
+C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfo.cs
+C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CoreCompileInputs.cache
 C:\Users\asus\Desktop\Travel_project\Infrastructure\bin\Debug\net6.0\Infrastructure.deps.json
 C:\Users\asus\Desktop\Travel_project\Infrastructure\bin\Debug\net6.0\Infrastructure.dll
 C:\Users\asus\Desktop\Travel_project\Infrastructure\bin\Debug\net6.0\Infrastructure.pdb
@@ -5,11 +10,6 @@ C:\Users\asus\Desktop\Travel_project\Infrastructure\bin\Debug\net6.0\Application
 C:\Users\asus\Desktop\Travel_project\Infrastructure\bin\Debug\net6.0\Domain.dll
 C:\Users\asus\Desktop\Travel_project\Infrastructure\bin\Debug\net6.0\Application.pdb
 C:\Users\asus\Desktop\Travel_project\Infrastructure\bin\Debug\net6.0\Domain.pdb
-C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.AssemblyReference.cache
-C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfoInputs.cache
-C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfo.cs
-C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CoreCompileInputs.cache
 C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CopyComplete
 C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\Infrastructure.dll
 C:\Users\asus\Desktop\Travel_project\Infrastructure\obj\Debug\net6.0\refint\Infrastructure.dll

@@ -49,7 +49,7 @@ namespace Travel_project.Controllers
                 return BadRequest(result.Errors);
             }
             string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            string? link = Url.Action("ConfirmUser", "Account", new { email = user.Email, token = token }, HttpContext.Request.Scheme);
+            string? link = Url.Action("ConfirmUser", "Auth", new { email = user.Email, token = token }, HttpContext.Request.Scheme);
             _emailService.SendMessage(token, "Confirm", user.Email);
             return Ok(new
             {
@@ -122,27 +122,32 @@ namespace Travel_project.Controllers
         {
             var user = await _userManager.FindByEmailAsync(forgotPassword.Email);
             if (user is null)
+            {
                 return BadRequest("User not found.");
+            }
 
             string token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            string link = Url.Action("ResetPassword", "Account", new { userId = user.Id, token });
-            await _emailService.SendMessage(new MailRequestDto { ToEmail = forgotPassword.Email, Subject = "ResetPassword", Body = $"<a href={link}/a>" });
+            string link = Url.Action("ResetPassword", "Auth", new { UserId = user.Id, token });
+            string message = $"Please reset your password by clicking the following link: {link}";
+            string subject = "Password Reset";
+            _emailService.SendMessage(message, subject, user.Email);
             return Ok(link);
         }
         [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
+        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordDto resetPasswordDto, string UserId, string token)
         {
-            var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
+            var user = await _userManager.FindByIdAsync(UserId);
             if (user == null)
             {
-
                 return NotFound();
             }
-            var resetPasswordResult = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.NewPassword);
-            if (!resetPasswordResult.Succeeded)
+            var resetPasswordResul = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await _userManager.ResetPasswordAsync(user, resetPasswordResul,resetPasswordDto.NewPassword );
+            if (!result.Succeeded)
             {
-                return BadRequest(resetPasswordResult.Errors);
+                return BadRequest();
             }
+
             return Ok();
         }
 

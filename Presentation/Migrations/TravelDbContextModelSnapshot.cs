@@ -36,13 +36,14 @@ namespace Persistance.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(600)
                         .HasColumnType("nvarchar(600)");
+
+                    b.Property<string>("FAQs")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActived")
                         .HasColumnType("bit");
@@ -125,11 +126,17 @@ namespace Persistance.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("HotelId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsActived")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -146,9 +153,11 @@ namespace Persistance.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("HotelId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Domain.Entities.CommentLike", b =>
@@ -265,9 +274,6 @@ namespace Persistance.Migrations
 
                     b.Property<bool>("Pool")
                         .HasColumnType("bit");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
 
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
@@ -566,7 +572,7 @@ namespace Persistance.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -785,11 +791,19 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Domain.Entities.Comment", b =>
                 {
+                    b.HasOne("Domain.Entities.Hotel", "Hotel")
+                        .WithMany("Comments")
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Hotel");
 
                     b.Navigation("User");
                 });
@@ -972,6 +986,8 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Domain.Entities.Hotel", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Images");
 
                     b.Navigation("Rooms");

@@ -1,5 +1,6 @@
 ﻿using Application.Abstract;
 using Application.DTOs.CommentDto;
+using Application.Validation.Commnet;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataContext;
@@ -29,10 +30,11 @@ namespace Persistance.Concrets
             {
                 Text = comment.Text,
                 UserId = (int)loginId,
+                HotelId = comment.HotelId,
             };
             _context.Comments.Add(newComment);
             await  _context.SaveChangesAsync();
-            return new GetCommentDto { Text = newComment.Text,Id=newComment.Id};
+            return new GetCommentDto { Text = newComment.Text,Id=newComment.Id, HotelId=newComment.HotelId};
         }
         public async Task CommentDeleteAsync(int id)
         {

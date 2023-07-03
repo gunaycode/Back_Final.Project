@@ -56,10 +56,6 @@ namespace Travel_project.Controllers
                 await Console.Out.WriteLineAsync(e.Message);
                 throw;
             }
-       
-
-
-
         }
     }
 }

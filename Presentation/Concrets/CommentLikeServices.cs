@@ -42,6 +42,9 @@ namespace Persistance.Concrets
             return totalLikes;
         }
 
-     
+        public Task<int> DeleteLike(int userId, int commentId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

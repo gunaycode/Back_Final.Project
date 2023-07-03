@@ -106,12 +106,12 @@ namespace Travel_project.Controllers
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
-        [HttpPost("{hotelId}/Images")]
-        public async Task<ActionResult> UpdateImagesHotelAsync(int hotelId, [FromForm] EditImageBlogDto images)
+        [HttpPost("{blogId}/Images")]
+        public async Task<ActionResult> UpdateImagesHotelAsync(int blogId, [FromForm] EditImageBlogDto images)
         {
             try
             {
-                return Ok(await _services.UpdateImagesHotelAsync(images, hotelId));
+                return Ok(await _services.UpdateImagesHotelAsync(images,blogId ));
             }
             catch (NotFoundException ex)
             {
@@ -130,6 +130,18 @@ namespace Travel_project.Controllers
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
-
+        [HttpDelete("{blogId}")]
+        public async Task<IActionResult> DeleteAsync(int blogId)
+        {
+            try
+            {
+                await _services.DeleteAsync(blogId);
+                return NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
     }
 }

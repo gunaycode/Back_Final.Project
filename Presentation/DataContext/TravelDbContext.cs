@@ -21,8 +21,7 @@ namespace Persistance.DataContext
         {
 
         }
-        public DbSet<Comment> Comments { get; set; }
-        
+        public DbSet<Comment> Comments { get; set; }   
         public DbSet<CommentLike> CommentLikes { get; set; }
         public DbSet<Hotel>Hotels { get; set; }
         public DbSet<Country> Countries { get; set; }

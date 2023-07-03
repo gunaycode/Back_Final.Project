@@ -16,7 +16,6 @@ namespace Domain.Entities
             Images = new HashSet<ImageHotel>();
         }
         public string Name { get; set; } = null!;
-        public int Rating { get; set; }
         public int CityId { get; set; }
         public City City { get; set; }
         public bool WiFi { get; set; }
@@ -25,6 +24,7 @@ namespace Domain.Entities
         public HotelLocation Location { get; set; }
         public bool Breakfast { get; set; }
         public bool Pet { get; set; }
+        public ICollection<Comment> Comments { get; set; }
         public ICollection<Room> Rooms { get; set; }
         public ICollection<ImageHotel> Images { get; set; }
        

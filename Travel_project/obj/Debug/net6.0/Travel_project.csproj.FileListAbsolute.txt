@@ -1,3 +1,9 @@
+C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.csproj.AssemblyReference.cache
+C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.AssemblyInfo.cs
+C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\appsettings.json
 C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\Travel_project.staticwebassets.runtime.json
@@ -249,13 +255,6 @@ C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\Infrastruct
 C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\Persistance.pdb
 C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\Application.pdb
 C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\Domain.pdb
-C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.csproj.AssemblyReference.cache
-C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.AssemblyInfoInputs.cache
-C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.AssemblyInfo.cs
-C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.csproj.CoreCompileInputs.cache
-C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\staticwebassets\msbuild.Travel_project.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\staticwebassets\msbuild.build.Travel_project.props
 C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Travel_project.props
@@ -270,3 +269,4 @@ C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\refint\Trav
 C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.pdb
 C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.genruntimeconfig.cache
 C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\ref\Travel_project.dll
+C:\Users\asus\Desktop\Travel_project\Travel_project\obj\Debug\net6.0\Travel_project.MvcApplicationPartsAssemblyInfo.cs

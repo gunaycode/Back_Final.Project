@@ -20,7 +20,6 @@ namespace Persistance.Configuration
             builder.Property(h => h.Name)
                 .IsRequired()
                 .HasMaxLength(100);
-            builder.Property(h => h.Rating).IsRequired();
             
             builder.HasOne(h => h.City)
                 .WithMany(c => c.Hotels)

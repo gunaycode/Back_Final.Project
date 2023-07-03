@@ -12,7 +12,6 @@ namespace Application.DTOs.HotelDto
     {
         
         public string Name { get; set; } = null!;
-        public int Rating { get; set; }
         public int CityId { get; set; }
         public bool WiFi { get; set; }
         public bool Pool { get; set; }

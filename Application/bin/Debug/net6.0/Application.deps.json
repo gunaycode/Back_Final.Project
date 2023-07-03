@@ -224,6 +224,7 @@
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
       "Domain/1.0.0": {
         "dependencies": {
+          "FluentValidation": "11.5.2",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.12"
         },
         "runtime": {

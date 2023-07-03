@@ -35,7 +35,7 @@ namespace Persistance.Concrets
               Title = createBlogDto.Title,
               Description = createBlogDto.Description,
               TextAll = createBlogDto.TextAll,
-              Date=createBlogDto.Date,
+              FAQs = createBlogDto.FAQs,
             };
             if (blog.Images != null)
             {
@@ -45,7 +45,7 @@ namespace Persistance.Concrets
                         throw new FileTypeException("Check exception");
                     if (!file.CheckFileType("image/"))
                         throw new FileSizeException();
-                    string newFileName = await file.FileUploadAsync(_webHostEnvironment.WebRootPath, "Images");
+                    string newFileName = await file.FileUploadAsync(_webHostEnvironment.WebRootPath, "ImagesBlog");
                     blog.Images.Add(new ImageBlog()
                     {
                         ImageName = newFileName,
@@ -61,12 +61,25 @@ namespace Persistance.Concrets
                 Title = blog.Title,
                 Description= blog.Description,
                 TextAll= blog.TextAll,
+                FAQs= blog.FAQs,
                 BlogImages = blog.Images.Select(i => new GetBlogImageDto()
                 {
                     Id = i.Id,
                     Url = $"https://localhost:7046/api/Blog/Images/{i.ImageName}"
                 }).ToList()
             };
+        }
+
+        public async Task<GetBlogDto> DeleteAsync(int blogId)
+        {
+            Blog? blog = await _context.Blogs.FindAsync(blogId);
+            if (blog == null)
+            {
+                throw new NotFoundException("Hotel not found");
+            }
+            _context.Blogs.Remove(blog);
+            await _context.SaveChangesAsync();
+            return new GetBlogDto();
         }
         public async Task<GetBlogDto> EditAsync(EditBlogDto editBlogDto, int id)
         {
@@ -79,16 +92,17 @@ namespace Persistance.Concrets
             blog.Title = editBlogDto.Title;
             blog.Description = editBlogDto.Description;
             blog.TextAll = editBlogDto.TextAll;
-            blog.Date=editBlogDto.Date;
+            blog.FAQs = editBlogDto.FAQs;
+           
             await _context.SaveChangesAsync();
 
             return new GetBlogDto
             {
                 Id = blog.Id,
                 TextAll = blog.TextAll,
-                Date = blog.Date,
                 Description = editBlogDto.Description,
                 Title = editBlogDto.Title,
+                FAQs= editBlogDto.FAQs,
             };
         }
         public async Task<List<GetBlogDto>> GetAllAsync()
@@ -109,14 +123,14 @@ namespace Persistance.Concrets
             }).ToList();
             return getBlogDtos;
         }
-
         public async Task<GetBlogDto> GetByIdAsync(int id)
         {
             Blog? blog = await _context.Blogs.FirstOrDefaultAsync(h => h.Id == id) ??
                throw new NotFoundException();
             return new GetBlogDto { Id = blog.Id, Title=blog.Title,
                 Description=blog.Description,
-                TextAll=blog.TextAll,Date=blog.Date,BlogImages = (List<GetBlogImageDto>)blog.Images };
+                FAQs = blog.FAQs,
+                TextAll=blog.TextAll,BlogImages = (List<GetBlogImageDto>)blog.Images };
         }
 
         public async Task<List<GetImageBlogDto>> UpdateImagesHotelAsync(EditImageBlogDto editImageBlogDto, int blogId)
@@ -146,6 +160,12 @@ namespace Persistance.Concrets
                     
                     Path = Path.Combine(_webHostEnvironment.WebRootPath, "BlogImages")
                 };
+
+                foreach (var item in blog.Images)
+                {
+                    blog.Images.Remove(item);
+                }
+
                 blog.Images.Add(newImage);
                 updatedImages.Add(new GetImageBlogDto
                 {

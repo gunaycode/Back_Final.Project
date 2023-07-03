@@ -3,6 +3,7 @@ using Application.DTOs.Filter;
 using Application.DTOs.SearchDto;
 using Domain.Entities;
 using Domain.Entities.Enum;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Persistance.DataContext;
@@ -23,66 +24,48 @@ namespace Persistance.Concrets
         {
             _context = context;
         }
-        public async Task<List<Hotel>> Filter(int? rating, decimal? MinPrice,decimal? MaxPrice ,bool? wifi, HotelLocation? location, bool? pet, bool? pool, bool? parking, bool? breakfast)
+        public async Task<List<Hotel>> Filter([FromQuery] int? rating, [FromQuery] decimal? MinPrice, [FromQuery] decimal? MaxPrice, [FromQuery] bool? wifi, [FromQuery] HotelLocation? location, [FromQuery] bool? pet, [FromQuery] bool? pool, [FromQuery] bool? parking, [FromQuery] bool? breakfast)
         {
             var query = _context.Hotels
-            .Include(r => r.Rooms);
-            if(rating == null)
+            .Include(r => r.Rooms)
+            .Include(c => c.Comments);
+            if (rating == null)
             {
-                query.Where(r=>r.Rating==rating);
+                query.Where(c => c.Comments.Any(c => c.Rating == rating)).OrderBy(c => c.Comments.OrderBy(c => c.Rating));
             }
             if (MinPrice != null && MaxPrice != null)
             {
-                query.Where(x => x.Rooms.Any(r =>  r.Price > MinPrice && r.Price < MaxPrice ));
+                query.Where(x => x.Rooms.Any(r => r.Price > MinPrice && r.Price < MaxPrice));
             }
             if (pet != null)
             {
-                query.Where(p=>p.Pet==pet);
+                query.Where(p => p.Pet == pet);
             }
             if (pool != null)
             {
-                query.Where(p=>p.Pool==pool);
+                query.Where(p => p.Pool == pool);
             }
-            if(location!=null)
+            if (location != null)
             {
                 query.Where(l => l.Location == location);
             }
-            if(wifi!= null)
+            if (wifi != null)
             {
-                query.Where(w=>w.WiFi==wifi);
+                query.Where(w => w.WiFi == wifi);
             }
-            if(parking!= null)
+            if (parking != null)
             {
-                query.Where(p=>p.Parking==parking);
+                query.Where(p => p.Parking == parking);
             }
-            if(breakfast!= null)
+            if (breakfast != null)
             {
-                query.Where(b=>b.Breakfast==breakfast);   
+                query.Where(b => b.Breakfast == breakfast);
             }
             List<Hotel> hotels = await query.ToListAsync();
             return hotels;
 
         }
 
-        //        var query = _travelDb.Hotels
-        //               .Include(h => h.City)
-        //               .Include(h => h.Rooms)
-        //               .ThenInclude(h => h.Reservations);
-        //            if (city != null)
-        //            {
-        //                query.Where(h => h.CityId == city);
-        //            }
-        //            if (count != null)
-        //            {
-        //                query.Where(h => h.Rooms.Any(r => r.Count == count));
-        //            }
-        //              if (date != null)
-        //            {
-        //              query.Where(h => h.Rooms.Any(r => r.Reservations.Any(re => re.Date != date)));
-        //            }
-        //List<Hotel> hotels = await query.ToListAsync();
-        //            return hotels;
-        //    }
     }
 }
 

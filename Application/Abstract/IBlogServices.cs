@@ -17,6 +17,7 @@ namespace Application.Abstract
         Task<List<GetImageBlogDto>> UpdateImagesHotelAsync(EditImageBlogDto editImageBlogDto, int blogId);
         Task<GetBlogDto> GetByIdAsync(int id);
         Task<List<GetBlogDto>> GetAllAsync();
+        Task<GetBlogDto> DeleteAsync(int hotelId);
 
     }
 }

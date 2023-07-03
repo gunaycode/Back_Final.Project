@@ -15,7 +15,10 @@ namespace Domain.Entities
         }
         public string Text { get; set; } = null!;
         public User User { get; set; } = null!;
+        public int Rating { get; set; }
         public int UserId { get; set; } 
+        public Hotel Hotel { get; set; }
+        public int HotelId { get; set; }
         public ICollection<CommentLike> CommentLikes { get; set; }
     }
 }

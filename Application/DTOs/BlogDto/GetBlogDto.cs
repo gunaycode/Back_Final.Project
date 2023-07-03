@@ -13,7 +13,7 @@ namespace Application.DTOs.BlogDto
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public string TextAll { get; set; } = null!;
-        public DateTime Date { get; set; }
+        public string FAQs { get; set; } = null!;
         public List<GetBlogImageDto> BlogImages { get; set; }
     }
 

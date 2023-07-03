@@ -25,9 +25,11 @@ namespace Persistance.Configuration
 
             builder.Property(b => b.TextAll)
                 .IsRequired();
-            builder.Property(d => d.Date)
-            .IsRequired();
-            
+
+            builder.Property(d => d.FAQs)
+           .IsRequired();
+
+
 
         }
         

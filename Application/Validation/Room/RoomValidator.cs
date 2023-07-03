@@ -16,7 +16,7 @@ namespace Application.Validation.Room
             RuleFor(p => p.Price)
               .NotEmpty()
               .NotNull();
-        }
+       }
 
     }
 }

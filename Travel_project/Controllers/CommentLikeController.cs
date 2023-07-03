@@ -11,7 +11,7 @@ namespace Travel_project.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-   
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class CommentLikeController:ControllerBase
     {
         private readonly ICommentLikeServices _commentLike;
@@ -50,5 +50,6 @@ namespace Travel_project.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
     }
 }

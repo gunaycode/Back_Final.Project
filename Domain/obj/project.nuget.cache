@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "VhBoVyZwgybEEKLHHULMNA3E9iCB2Mjh8uPZhVnZWn3gszbApbMn5dENle0RL9fnnEHi3UaUUmcGSvBGD4PR4Q==",
+  "dgSpecHash": "h+6CuO7uw8PvuMPel2OzaW8GfOC3H4+m0378CzqJXlyQhb37U6vJ1oyEE7hCqIiMj3xtYMcOdxjXpeoXdkDPkw==",
   "success": true,
   "projectFilePath": "C:\\Users\\asus\\Desktop\\Travel_project\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\asus\\.nuget\\packages\\fluentvalidation\\11.5.2\\fluentvalidation.11.5.2.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.12\\microsoft.aspnetcore.cryptography.internal.6.0.12.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.12\\microsoft.aspnetcore.cryptography.keyderivation.6.0.12.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.12\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.12.nupkg.sha512",

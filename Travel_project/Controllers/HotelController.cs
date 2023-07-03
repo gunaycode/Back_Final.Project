@@ -51,7 +51,7 @@ namespace Travel_project.Controllers
         {
             try
             {
-                return StatusCode(200, await _context.Hotels.Include(i=>i.Images).ToListAsync());
+                return StatusCode(200, await _context.Hotels.Include(i => i.Images).ToListAsync());
             }
             catch (NotFoundException ex)
             {
@@ -64,7 +64,7 @@ namespace Travel_project.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
         {
-            Hotel? hotel = await _context.Hotels.Include(i=>i.Images).FirstOrDefaultAsync(h => h.Id == id);
+            Hotel? hotel = await _context.Hotels.Include(i => i.Images).FirstOrDefaultAsync(h => h.Id == id);
             if (hotel == null)
             {
                 return NotFound();
@@ -134,8 +134,30 @@ namespace Travel_project.Controllers
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
+        [HttpDelete("{hotelId}")]
+        public async Task<IActionResult> DeleteAsync(int hotelId)
+        {
+            try
+            {
+                await _services.DeleteAsync(hotelId);
+                return NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
 
-
+        [HttpGet("{hotelId}/rating")]
+        public decimal CalculateRating(int hotelId)
+        {
+           var commnets = _context.Comments.Where(h => h.Hotel.Id == hotelId);
+            if (commnets.Count() <= 0)
+            {
+               return 0;
+            }
+            return ((decimal)commnets.Sum(c => c.Rating) / commnets.Count());
+        }
     }
 
 }

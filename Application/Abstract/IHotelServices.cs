@@ -17,6 +17,6 @@ namespace Application.Abstract
         Task<List<GetImageHotelDto>> UpdateImagesHotelAsync(UpdateImagesHotelDto updateImageHotelDto, int hotelId);
         Task<GetHotelDto> GetByIdAsync(int id); 
         Task<List<GetHotelDto>> GetAllAsync();
-        
+        Task<GetHotelDto> DeleteAsync(int hotelId);
     }
 }
