@@ -1,14 +1,7 @@
-﻿using Application.DTOs.CountryDto;
-using Application.DTOs.HotelDto;
-using Application.DTOs.SearchDto;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;

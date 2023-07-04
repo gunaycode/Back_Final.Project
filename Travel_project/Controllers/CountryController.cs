@@ -3,6 +3,7 @@ using Application.DTOs.CountryDto;
 using Application.DTOs.HotelDto;
 using Application.DTOs.ResponseDto;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataContext;
@@ -97,6 +98,22 @@ namespace Travel_project.Controllers
                 return NotFound();
             }
             return StatusCode(StatusCodes.Status200OK,country);
+        }
+
+        [HttpGet("/api/Countries")]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                return StatusCode(200, await _context.Countries.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    ex.Message
+                });
+            }
         }
     }
 }

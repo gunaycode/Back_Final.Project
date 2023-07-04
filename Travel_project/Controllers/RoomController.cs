@@ -6,6 +6,7 @@ using Application.DTOs.ImageRoomDto;
 using Application.DTOs.ResponseDto;
 using Application.DTOs.RoomDto;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
@@ -65,26 +66,26 @@ namespace Travel_project.Controllers
             }
         }
 
-        [HttpGet("Images/{ImageName}")]
+        //[HttpGet("Images/{ImageName}")]
 
-        public async Task<IActionResult> GetImagesAsync([FromRoute] string ImageName)
-        {
-            var file = await _context.ImagesHotel.FirstOrDefaultAsync(f => f.ImageName == ImageName)
-                ?? throw new Exception("Image not found");
+        //public async Task<IActionResult> GetImagesAsync([FromRoute] string ImageName)
+        //{
+        //    var file = await _context.ImagesRoom.FirstOrDefaultAsync(f => f.ImageName == ImageName)
+        //        ?? throw new Exception("Image not found");
 
-            string path = Path.Combine(_environment.WebRootPath, "Images", file.ImageName);
-            if (!System.IO.File.Exists(path))
-                throw new Exception("File not found");
+        //    string path = Path.Combine(_environment.WebRootPath, "Images", file.ImageName);
+        //    if (!System.IO.File.Exists(path))
+        //        throw new Exception("File not found");
 
-            FileExtensionContentTypeProvider provider = new();
-            byte[] imageBytes = System.IO.File.ReadAllBytes(path);
+        //    FileExtensionContentTypeProvider provider = new();
+        //    byte[] imageBytes = System.IO.File.ReadAllBytes(path);
 
 
-            if (provider.TryGetContentType(path, out string? contentType))
-                contentType = "application/octet-stream";
+        //    if (provider.TryGetContentType(path, out string? contentType))
+        //        contentType = "application/octet-stream";
 
-            return File(imageBytes, contentType);
-        }
+        //    return File(imageBytes, contentType);
+        //}
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)

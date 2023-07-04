@@ -27,39 +27,38 @@ namespace Persistance.Concrets
         public async Task<List<Hotel>> Filter([FromQuery] int? rating, [FromQuery] decimal? MinPrice, [FromQuery] decimal? MaxPrice, [FromQuery] bool? wifi, [FromQuery] HotelLocation? location, [FromQuery] bool? pet, [FromQuery] bool? pool, [FromQuery] bool? parking, [FromQuery] bool? breakfast)
         {
             var query = _context.Hotels
-            .Include(r => r.Rooms)
-            .Include(c => c.Comments);
+            .AsQueryable();
             if (rating == null)
             {
-                query.Where(c => c.Comments.Any(c => c.Rating == rating)).OrderBy(c => c.Comments.OrderBy(c => c.Rating));
+              query=  query.Include(c=>c.Comments).Where(c => c.Comments.Any(c => c.Rating == rating)).OrderBy(c => c.Comments.OrderBy(c => c.Rating));
             }
             if (MinPrice != null && MaxPrice != null)
             {
-                query.Where(x => x.Rooms.Any(r => r.Price > MinPrice && r.Price < MaxPrice));
+              query=  query.Include(c=>c.Rooms).Where(x => x.Rooms.Any(r => r.Price > MinPrice && r.Price < MaxPrice));
             }
             if (pet != null)
             {
-                query.Where(p => p.Pet == pet);
+               query= query.Where(p => p.Pet == pet);
             }
             if (pool != null)
             {
-                query.Where(p => p.Pool == pool);
+               query= query.Where(p => p.Pool == pool);
             }
             if (location != null)
             {
-                query.Where(l => l.Location == location);
+               query= query.Where(l => l.Location == location);
             }
             if (wifi != null)
             {
-                query.Where(w => w.WiFi == wifi);
+                query=query.Where(w => w.WiFi == wifi);
             }
             if (parking != null)
             {
-                query.Where(p => p.Parking == parking);
+               query= query.Where(p => p.Parking == parking);
             }
             if (breakfast != null)
             {
-                query.Where(b => b.Breakfast == breakfast);
+               query= query.Where(b => b.Breakfast == breakfast);
             }
             List<Hotel> hotels = await query.ToListAsync();
             return hotels;

@@ -77,7 +77,7 @@ namespace Travel_project.Controllers
                 return StatusCode(StatusCodes.Status502BadGateway, new ResponseDto { Status = "Error", Message = ex.Message });
             }
         }
-        [HttpPost("/api/RoomCategories")]
+        [HttpGet("/api/RoomCategories")]
         public async Task<IActionResult> GettAll()
         {
             try

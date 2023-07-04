@@ -19,7 +19,7 @@ namespace Travel_project.BackGroundServices
         public Task StartAsync(CancellationToken cancellationToken)
         {
             Console.WriteLine($"{nameof(DateTimeLogWriter)}Service started....");
-            timer = new Timer(writeDateTimeOnLog, null, TimeSpan.Zero, TimeSpan.FromDays(1));
+            timer = new Timer(writeDateTimeOnLog, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
             return Task.CompletedTask;
         }
         private async void writeDateTimeOnLog(object state)

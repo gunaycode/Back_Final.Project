@@ -29,10 +29,7 @@ namespace Persistance.Configuration
             builder.Property(d => d.FAQs)
            .IsRequired();
 
-
-
         }
         
-
     }
 }

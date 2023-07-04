@@ -73,7 +73,7 @@ namespace Persistance.Concrets
             Blog? blog = await _context.Blogs.FindAsync(blogId);
             if (blog == null)
             {
-                throw new NotFoundException("Hotel not found");
+                throw new NotFoundException("Blog not found");
             }
             _context.Blogs.Remove(blog);
             await _context.SaveChangesAsync();
@@ -125,10 +125,13 @@ namespace Persistance.Concrets
         {
             Blog? blog = await _context.Blogs.FirstOrDefaultAsync(h => h.Id == id) ??
                throw new NotFoundException();
-            return new GetBlogDto { Id = blog.Id, Title=blog.Title,
+            return new GetBlogDto 
+            { 
+                Id = blog.Id, Title=blog.Title,
                 Description=blog.Description,
                 FAQs = blog.FAQs,
-                TextAll=blog.TextAll,BlogImages = (List<GetBlogImageDto>)blog.Images };
+                TextAll=blog.TextAll,BlogImages = (List<GetBlogImageDto>)blog.Images 
+            };
         }
 
         public async Task<List<GetImageBlogDto>> UpdateImagesHotelAsync(EditImageBlogDto editImageBlogDto, int blogId)
@@ -152,13 +155,13 @@ namespace Persistance.Concrets
                 {
                     throw new FileSizeException();
                 }
-                string newFileName = await image.FileUploadAsync(_webHostEnvironment.WebRootPath, "ImagesBlog");
+                //string newFileName = await image.FileUploadAsync(_webHostEnvironment.WebRootPath, "ImagesBlog");
                 FileUploadResult fileUploadResult = await _fileService.UploudFileAsync("blogimages", image);
                 ImageBlog newImage = new ImageBlog
                 {
-                    ImageName = newFileName,
+                    ImageName = fileUploadResult.fileName,
                     BlogId = blogId, 
-                    Path = $"https://travelapi.blob.core.windows.net/blogimages/{fileUploadResult.filePath}"
+                    Path = $"https://travelapi.blob.core.windows.net/{fileUploadResult.filePath}"
                 };
                 updatedImagesBlog.Add(newImage);
                 foreach (var item in blog.Images)
@@ -171,7 +174,7 @@ namespace Persistance.Concrets
                 {
                     ImageName = newImage.ImageName,
                     blogId=blogId,
-                    Url = $"https://travelapi.blob.core.windows.net/blogimages/{fileUploadResult.filePath}"
+                    Url = $"https://travelapi.blob.core.windows.net/{fileUploadResult.filePath}"
                 });
             }
             blog.Images = updatedImagesBlog;

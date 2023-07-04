@@ -14,6 +14,7 @@ namespace Application.DTOs.CommentDto
         public DateTime CreateDate { get; set; }=DateTime.Now;
         public int HotelId { get; set; }
         public int Rating { get; set; }
+        public int UserId { get; set; }
 
 
     }

@@ -12,6 +12,5 @@ namespace Domain.Entities.Enum
         MerkezdenUzaq=2,
         SahilKenari=3,
         SahildenUzaq=4,
-
     }
 }

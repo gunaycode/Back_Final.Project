@@ -5,6 +5,7 @@ using Application.DTOs.HotelDto;
 using Application.DTOs.ImageHotelDto;
 using Application.DTOs.ResponseDto;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
@@ -28,7 +29,7 @@ namespace Travel_project.Controllers
         private readonly IAzureFileService _fileService;
 
         public HotelController(IHotelServices services,
-               TravelDbContext context, 
+               TravelDbContext context,
                IWebHostEnvironment environment,
                IAzureFileService fileService)
         {
@@ -83,26 +84,26 @@ namespace Travel_project.Controllers
             return StatusCode(StatusCodes.Status200OK, hotel);
         }
 
-        [HttpGet("Images/{ImageName}")]
+        //[HttpGet("Images/{ImageName}")]
 
-        public async Task<IActionResult> GetImagesAsync([FromRoute] string ImageName)
-        {
-            var file = await _context.ImagesHotel.FirstOrDefaultAsync(f => f.ImageName == ImageName)
-                ?? throw new Exception("Image not found");
+        //public async Task<IActionResult> GetImagesAsync([FromRoute] string ImageName)
+        //{
+        //    var file = await _context.ImagesHotel.FirstOrDefaultAsync(f => f.ImageName == ImageName)
+        //        ?? throw new Exception("Image not found");
 
-            string path = Path.Combine(_environment.WebRootPath, "Images", file.ImageName);
-            if (!System.IO.File.Exists(path))
-                throw new Exception("File not found");
+        //    string path = Path.Combine(_environment.WebRootPath, "Images", file.ImageName);
+        //    if (!System.IO.File.Exists(path))
+        //        throw new Exception("File not found");
 
-            FileExtensionContentTypeProvider provider = new();
-            byte[] imageBytes = System.IO.File.ReadAllBytes(path);
+        //    FileExtensionContentTypeProvider provider = new();
+        //    byte[] imageBytes = System.IO.File.ReadAllBytes(path);
 
 
-            if (provider.TryGetContentType(path, out string? contentType))
-                contentType = "application/octet-stream";
+        //    if (provider.TryGetContentType(path, out string? contentType))
+        //        contentType = "application/octet-stream";
 
-            return File(imageBytes, contentType);
-        }
+        //    return File(imageBytes, contentType);
+        //}
 
         [HttpPut("{id}/Update")]
         public async Task<IActionResult> UpdateHotel(int id, [FromBody] UpdateHotelDto updateHotelDto)

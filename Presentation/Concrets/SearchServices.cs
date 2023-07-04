@@ -18,27 +18,27 @@ namespace Persistance.Concrets
         {
             _travelDb = travelDb;
         }
-        public async Task<List<Hotel>> Search(int? count, int? city, DateTime? date)
+        public async Task<List<Hotel>> Search(int? count, int? cityId, DateTime? date)
         {
             var query = _travelDb.Hotels
-               .Include(h => h.City)
-               .Include(h => h.Rooms)
-               .ThenInclude(h => h.Reservations);
-            if (city != null)
-            {
-                query.Where(h => h.CityId == city);
-            }
+            .AsQueryable();
+                    
             if (count != null)
             {
-                query.Where(h => h.Rooms.Any(r => r.Count == count));
+               query = query.Include(h=>h.Rooms).Where(h => h.Rooms.Any(r => r.Count == count));
             }
             if (date != null)
             {
-                query.Where(h => h.Rooms.Any(r => r.Reservations.Any(re => re.Date != date)));
+               query= query.Include(c=>c.Rooms).ThenInclude(r=>r.Reservations).Where(h => h.Rooms.Any(r => r.Reservations.Any(re => re.Date != date)));
+            }
+            if (cityId != null)
+            {
+               query= query.Where(h => h.CityId == cityId);
             }
             List<Hotel> hotels = await query.ToListAsync();
+              
             return hotels;
-
+            
         }
 
     }

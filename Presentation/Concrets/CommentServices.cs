@@ -1,5 +1,7 @@
 ﻿using Application.Abstract;
+using Application.DTOs.CityDto;
 using Application.DTOs.CommentDto;
+using Application.DTOs.ReservationDto;
 using Application.Validation.Commnet;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +36,7 @@ namespace Persistance.Concrets
             };
             _context.Comments.Add(newComment);
             await  _context.SaveChangesAsync();
-            return new GetCommentDto { Text = newComment.Text,Id=newComment.Id, HotelId=newComment.HotelId};
+            return new GetCommentDto { Text = newComment.Text,Id=newComment.Id, HotelId=newComment.HotelId, UserId=newComment.UserId, Rating=newComment.Rating};
         }
         public async Task CommentDeleteAsync(int id)
         {
@@ -42,7 +44,33 @@ namespace Persistance.Concrets
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
         }
-        
+        public async Task<GetCommentDto> GetByIdAsync(int id)
+        {
+           Comment ? comment = await _context.Comments.FirstOrDefaultAsync(h => h.Id == id) ??
+               throw new NotFoundException();
+            return new GetCommentDto
+            {
+               Id=comment.Id,
+               UserId=comment.UserId,
+               HotelId=comment.HotelId,
+               Rating = comment.Rating
+            };
+        }
 
+        public async Task<GetCommentDto> GetAllAsync()
+        {
+            List<Comment>? comments = await _context.Comments.ToListAsync() ??
+                  throw new NotFoundException();
+            List<GetCommentDto> getCity = comments.Select(h => new GetCommentDto
+            {
+                Id = h.Id,
+                UserId = h.UserId,
+                HotelId = h.HotelId,
+                Rating=h.Rating,
+
+                
+            }).ToList();
+            return new GetCommentDto { };
+        }
     }
 }

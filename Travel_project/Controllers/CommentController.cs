@@ -20,8 +20,8 @@ namespace Travel_project.Controllers
     public class CommentController:ControllerBase
     {
 
-        readonly ICommentServices _services;
-        readonly TravelDbContext _context;
+        public readonly ICommentServices _services;
+       private readonly TravelDbContext _context;
         public CommentController(ICommentServices services, TravelDbContext context)
         {
             _services = services;
@@ -44,8 +44,7 @@ namespace Travel_project.Controllers
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
-        {
-            
+        {  
             try
             {
                 await _services.CommentDeleteAsync(id);
@@ -54,12 +53,10 @@ namespace Travel_project.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status502BadGateway, new ResponseDto { Status = "Error", Message = ex.Message });
-            }
-            
+            }  
         }
-
-        [HttpPost("/api/Comments")]
-        public async Task<IActionResult> GettAll()
+        [HttpGet("api/Comments")]
+        public async Task<IActionResult> GetAll()
         {
             try
             {
@@ -73,7 +70,16 @@ namespace Travel_project.Controllers
                 });
             }
         }
-
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
+        {
+            Comment? comment = await _context.Comments.FirstOrDefaultAsync(h => h.Id == id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            return StatusCode(StatusCodes.Status200OK, comment);
+        }
 
     }
 }

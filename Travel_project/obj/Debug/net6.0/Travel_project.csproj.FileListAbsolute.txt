@@ -275,3 +275,5 @@ C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\Azure.Stora
 C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\Azure.Storage.Common.dll
 C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\System.IO.Hashing.dll
 C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\System.Memory.Data.dll
+C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\asus\Desktop\Travel_project\Travel_project\bin\Debug\net6.0\System.Web.Http.dll

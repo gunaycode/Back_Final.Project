@@ -1,6 +1,7 @@
 ﻿using Application.Abstract;
 using Application.Abstract.Common;
 using Application.DTOs.FileService;
+using Application.DTOs.HotelDto;
 using Application.DTOs.ImageRoomDto;
 using Application.DTOs.RoomDto;
 using Domain.Entities;
@@ -37,15 +38,17 @@ namespace Persistance.Concrets
             {
                 foreach (IFormFile file in roomDto.Images)
                 {
-                    if (file.CheckFileSize(8000000))//1024 bolur
+                    if (file.CheckFileSize(8000000))
                         throw new FileTypeException("Check exception");
                     if (!file.CheckFileType("image/"))
                         throw new FileSizeException();
-                    string newFileName = await file.FileUploadAsync(_environment.WebRootPath, "ImagesRoom");
+                    //string newFileName = await file.FileUploadAsync(_environment.WebRootPath, "ImagesRoom");
+                    FileUploadResult fileUploadResult = await _fileService.UploudFileAsync("roomimages", file);
+
                     room.RoomImages.Add(new ImageRoom()
                     {
-                        ImageName = newFileName,
-                        Path = newFileName,
+                        ImageName = fileUploadResult.fileName,
+                        Path = $"https://travelapi.blob.core.windows.net/roomimages/{fileUploadResult.fileName}",
                     });
                 }
                 _dbcontext.Rooms.Add(room);
@@ -61,7 +64,7 @@ namespace Persistance.Concrets
                 Images = room.RoomImages.Select(i => new GetImageRoomDto()
                 {
                     Id = i.Id,
-                    Url = $"https://travelapi.blob.core.windows.net/roomImages/{i.ImageName}"
+                    Url = $"https://travelapi.blob.core.windows.net/roomimages/{i.ImageName}"
                 }).ToList()
             };
         }
@@ -94,9 +97,13 @@ namespace Persistance.Concrets
                 Count = roomDto.Count
             };
         }
-        public Task<GetRoomDto> DeleteAsync(int id)
+        public async Task<GetRoomDto> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            Room? room = await _dbcontext.Rooms.FindAsync(id)
+               ?? throw new NotFoundException("Hotel not found");
+            _dbcontext.Rooms.Remove(room);
+            await _dbcontext.SaveChangesAsync();
+            return new GetRoomDto();
         }
         public async Task<List<GetRoomDto>> GetAllAsync()
         {
@@ -112,13 +119,12 @@ namespace Persistance.Concrets
                 Images = h.RoomImages.Select(i => new GetImageRoomDto()
                 {
                     Id = i.Id,
-                    Url = $"https://travelapi.blob.core.windows.net/roomImages/{i.ImageName}"
+                    Url = $"https://travelapi.blob.core.windows.net/roomimages/{i.ImageName}"
                 }).ToList()
 
             }).ToList();
             return getRoomDtos;
         }
-
         public async Task<List<GetImagesRoomDto>> UpdateRoomImagesAsync(EditImagesRoomDto editImagesRoom, int roomId)
         {
             Room? room = await _dbcontext.Rooms.FindAsync(roomId);
@@ -144,14 +150,14 @@ namespace Persistance.Concrets
                 {
                     ImageName = newFileName,
                     RoomId = roomId,
-                    Path = $"https://travelapi.blob.core.windows.net/roomImages/{fileUploadResult.filePath}"
+                    Path = $"https://travelapi.blob.core.windows.net/{fileUploadResult.filePath}"
                 };
                 room.RoomImages.Add(newImage);
                 updatedImages.Add(new GetImagesRoomDto
                 {
                     ImageName = newFileName,
                     roomId = roomId,
-                    Url = $"https://travelapi.blob.core.windows.net/roomImages/{fileUploadResult.filePath}"
+                    Url = $"https://travelapi.blob.core.windows.net/{fileUploadResult.filePath}"
 
                 });
             }

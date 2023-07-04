@@ -18,7 +18,7 @@ namespace Persistance.Concrets
         private readonly TravelDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IAzureFileService _fileService;
-        private object fileUploadResult;
+        
 
         public HotelServices(TravelDbContext context, IWebHostEnvironment webHostEnvironment, IAzureFileService fileService)
         {
@@ -114,7 +114,19 @@ namespace Persistance.Concrets
         {
             Hotel? hotel = await _context.Hotels.FirstOrDefaultAsync(h => h.Id == id) ??
                 throw new NotFoundException();
-            return new GetHotelDto { Id = hotel.Id, Name = hotel.Name, Images = (List<GetImageDto>)hotel.Images };
+            return new GetHotelDto
+            {
+                Id = hotel.Id, 
+                Name = hotel.Name,
+                Images = (List<GetImageDto>)hotel.Images,
+                CityId=hotel.CityId,
+                Parking=hotel.Parking,
+                Pet = hotel.Pet,
+                Breakfast = hotel.Breakfast,
+                Location = hotel.Location,
+                WiFi = hotel.WiFi,
+                Pool = hotel.Pool,
+            };
         }
         public async Task<List<GetHotelDto>> GetAllAsync()
         {
@@ -135,7 +147,7 @@ namespace Persistance.Concrets
                 Images = h.Images.Select(i => new GetImageDto()
                 {
                     Id = i.Id,
-                    Url = $""
+                    Url = $"https://travelapi.blob.core.windows.net/hotelimages/{i.ImageName}"
                 }).ToList()
 
 
@@ -168,7 +180,7 @@ namespace Persistance.Concrets
                 {
                     ImageName = fileUploadResult.fileName,
                     HotelId = hotelId,
-                    Path = $"https://travelapi.blob.core.windows.net/hotelimages/{fileUploadResult.filePath}"
+                    Path = $"https://travelapi.blob.core.windows.net/{fileUploadResult.filePath}"
                 };
                 updatedImagesHotel.Add(newImage);
                 updatedImages.Add(new GetImageHotelDto
@@ -176,7 +188,7 @@ namespace Persistance.Concrets
 
                     ImageName = fileUploadResult.fileName,
                     hotelId = hotelId,
-                    Url = $"https://travelapi.blob.core.windows.net/hotelimages/{fileUploadResult.filePath}"
+                    Url = $"https://travelapi.blob.core.windows.net/{fileUploadResult.filePath}"
                 });
             }
             hotel.Images = updatedImagesHotel;

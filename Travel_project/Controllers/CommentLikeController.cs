@@ -1,8 +1,12 @@
 ﻿using Application.Abstract;
+using Application.DTOs.CommentLike;
+using Application.DTOs.ResponseDto;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Persistance.Concrets;
 using Persistance.DataContext;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -11,39 +15,26 @@ namespace Travel_project.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+   [Authorize(AuthenticationSchemes = "Bearer")]
     public class CommentLikeController:ControllerBase
     {
         private readonly ICommentLikeServices _commentLike;
         private readonly TravelDbContext _context;
-        public readonly ICommentServices _commentService;
-        public CommentLikeController(ICommentServices commentServices, TravelDbContext context, ICommentLikeServices commentLikeServices)
+       
+        public CommentLikeController( TravelDbContext context, ICommentLikeServices commentLikeServices)
         {
             _commentLike = commentLikeServices;
             _context = context;
-            _commentService = commentServices;
+          
         }
          
-        [HttpPost("comment/{commentId}")]
-        public async Task<IActionResult> LikeComment(int commentId)
+        [HttpPost]
+        public async Task<IActionResult> LikeComment([FromBody] CreateLikeCommentDto commentId)
         {
             try
             {
-                var token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
-
-                var handler = new JwtSecurityTokenHandler();
-                var jwtToken = handler.ReadJwtToken(token);
-
-                var userIdClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == "sub");
-                
-                if (userIdClaim != null)
-                {
-                    var userId = userIdClaim.Value; 
-                                                
-                int totalLikes = await _commentLike.LikeComment(int.Parse(userId),commentId);
-                return Ok(new { TotalLikes = totalLikes });
-                }
-                return BadRequest();
+                  int totalLikes = await _commentLike.LikeComment( commentId.CommentId);
+                   return Ok(new { TotalLikes = totalLikes }); 
             }
             catch (Exception ex)
             {
@@ -51,5 +42,18 @@ namespace Travel_project.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            try
+            {
+                await _commentLike.CommentLikeDelete(id);
+                return StatusCode(StatusCodes.Status204NoContent, new ResponseDto { Status = "Successs", Message = "Comment delete successfully" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway, new ResponseDto { Status = "Error", Message = ex.Message });
+            }
+        }
     }
 }

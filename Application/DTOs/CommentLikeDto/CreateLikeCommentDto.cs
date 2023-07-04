@@ -9,7 +9,7 @@ namespace Application.DTOs.CommentLike
     public class CreateLikeCommentDto
     {
         public int CommentId { get; set; }
-        public int UserId { get; set; }
+        
         
     }
 }

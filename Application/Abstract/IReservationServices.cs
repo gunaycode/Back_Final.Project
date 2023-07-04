@@ -14,6 +14,7 @@ namespace Application.Abstract
         Task <List<GetReservationDto>> CreateAsync(List<CreateReservationDto> reservationDto);
         Task<GetReservationDto> GetByIdAsync(int id);
         Task<GetReservationDto> GetAllAsync();
+        Task ReservationDeleteAsync(int id);
 
     }
 }

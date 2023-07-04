@@ -15,11 +15,11 @@ namespace Travel_project.Controllers
             _search = search;
         }
         [HttpGet("search")]
-        public async Task<IActionResult> Search([FromQuery] int? count, [FromQuery] int? city, [FromQuery] DateTime? date)
+        public async Task<IActionResult> Search([FromQuery] int? count, [FromQuery] int? cityId, [FromQuery] DateTime? date)
         {
                 try
                 {
-                    List<Hotel> searchResults = await _search.Search(count, city, date);
+                    List<Hotel> searchResults = await _search.Search(count, cityId, date);
 
                     if (searchResults.Count > 0)
                     {

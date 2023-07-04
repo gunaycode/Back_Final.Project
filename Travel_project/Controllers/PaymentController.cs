@@ -7,7 +7,7 @@ namespace Travel_project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = "SuperAdmin,Admin")]
+    
     public class PaymentController : ControllerBase
     {
         [HttpPost]
