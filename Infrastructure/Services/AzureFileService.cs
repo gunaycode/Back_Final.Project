@@ -28,7 +28,7 @@ public class AzureFileService : IAzureFileService
         BlobClient blobClient = _blobContainerClient.GetBlobClient(newFileName);
         await blobClient.UploadAsync(file.OpenReadStream());
 
-        return new FileUploadResult(file.FileName,$"{containerName}/{newFileName}");
+        return new FileUploadResult(newFileName,$"{containerName}/{newFileName}");
 
     }
 

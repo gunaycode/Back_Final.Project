@@ -61,7 +61,7 @@ namespace Persistance.Concrets
                 Images = room.RoomImages.Select(i => new GetImageRoomDto()
                 {
                     Id = i.Id,
-                    Url = $"https://travelapi.blog.core.windows.net/roomImages/{i.ImageName}"
+                    Url = $"https://travelapi.blob.core.windows.net/roomImages/{i.ImageName}"
                 }).ToList()
             };
         }
@@ -112,7 +112,7 @@ namespace Persistance.Concrets
                 Images = h.RoomImages.Select(i => new GetImageRoomDto()
                 {
                     Id = i.Id,
-                    Url = $"https://travelapi.blog.core.windows.net/roomImages/{i.ImageName}"
+                    Url = $"https://travelapi.blob.core.windows.net/roomImages/{i.ImageName}"
                 }).ToList()
 
             }).ToList();
@@ -144,14 +144,14 @@ namespace Persistance.Concrets
                 {
                     ImageName = newFileName,
                     RoomId = roomId,
-                    Path = $"https://travelapi.blog.core.windows.net/roomImages/{fileUploadResult.filePath}"
+                    Path = $"https://travelapi.blob.core.windows.net/roomImages/{fileUploadResult.filePath}"
                 };
                 room.RoomImages.Add(newImage);
                 updatedImages.Add(new GetImagesRoomDto
                 {
                     ImageName = newFileName,
                     roomId = roomId,
-                    Url = $"https://travelapi.blog.core.windows.net/roomImages/{fileUploadResult.filePath}"
+                    Url = $"https://travelapi.blob.core.windows.net/roomImages/{fileUploadResult.filePath}"
 
                 });
             }

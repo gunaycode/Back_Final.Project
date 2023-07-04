@@ -47,7 +47,7 @@ namespace Persistance.Concrets
                     blog.Images.Add(new ImageBlog()
                     {
                         ImageName = fileUploadResult.fileName,
-                        Path = $"https://travelapi.blog.core.windows.net/blogimages/{fileUploadResult.fileName}",
+                        Path = $"https://travelapi.blob.core.windows.net/blogimages/{fileUploadResult.fileName}",
                     });
                 }
                 _context.Blogs.Add(blog);
@@ -63,7 +63,7 @@ namespace Persistance.Concrets
                 BlogImages = blog.Images.Select(i => new GetBlogImageDto()
                 {
                     Id = i.Id,
-                    Url = $"https://travelapi.blog.core.windows.net/blogimages/{i.ImageName}"
+                    Url = $"https://travelapi.blob.core.windows.net/blogimages/{i.ImageName}"
                 }).ToList()
             };
         }
@@ -114,7 +114,7 @@ namespace Persistance.Concrets
                 BlogImages = h.Images.Select(i => new GetBlogImageDto()
                 {
                     Id = i.Id,
-                    Url = $"https://travelapi.blog.core.windows.net/blogimages/{i.ImageName}"
+                    Url = $"https://travelapi.blob.core.windows.net/blogimages/{i.ImageName}"
                 }).ToList()
 
 
@@ -158,7 +158,7 @@ namespace Persistance.Concrets
                 {
                     ImageName = newFileName,
                     BlogId = blogId, 
-                    Path = $"https://travelapi.blog.core.windows.net/blogimages/{fileUploadResult.filePath}"
+                    Path = $"https://travelapi.blob.core.windows.net/blogimages/{fileUploadResult.filePath}"
                 };
                 updatedImagesBlog.Add(newImage);
                 foreach (var item in blog.Images)
@@ -171,7 +171,7 @@ namespace Persistance.Concrets
                 {
                     ImageName = newImage.ImageName,
                     blogId=blogId,
-                    Url = $"https://travelapi.blog.core.windows.net/blogimages/{fileUploadResult.filePath}"
+                    Url = $"https://travelapi.blob.core.windows.net/blogimages/{fileUploadResult.filePath}"
                 });
             }
             blog.Images = updatedImagesBlog;
