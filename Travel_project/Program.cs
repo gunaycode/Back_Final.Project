@@ -1,4 +1,5 @@
 using Application.Abstract;
+using Application.Abstract.Common;
 using Domain.Entities;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -62,6 +63,7 @@ builder.Services.AddScoped<IRoomCategoryServices,RoomCategoryServices>();
 builder.Services.AddScoped<IBlogServices, BlogServices>();  
 builder.Services.AddScoped<ISearchResultServices, SearchServices>();
 builder.Services.AddHostedService<DateTimeLogWriter>();
+builder.Services.AddScoped<IAzureFileService, AzureFileService>();
 
 builder.Services.AddSwaggerGen(opt =>
 {

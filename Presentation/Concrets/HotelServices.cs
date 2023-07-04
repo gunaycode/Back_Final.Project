@@ -1,4 +1,6 @@
 ﻿using Application.Abstract;
+using Application.Abstract.Common;
+using Application.DTOs.FileService;
 using Application.DTOs.HotelDto;
 using Application.DTOs.ImageHotelDto;
 using Application.DTOs.SearchDto;
@@ -22,10 +24,12 @@ namespace Persistance.Concrets
 
         private readonly TravelDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public HotelServices(TravelDbContext context, IWebHostEnvironment webHostEnvironment)
+        private readonly IAzureFileService _fileService;
+        public HotelServices(TravelDbContext context, IWebHostEnvironment webHostEnvironment, IAzureFileService fileService)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _fileService = fileService;
         }
 
         public async Task<GetHotelDto> CreateAsync(PostHotelDto postHotelDto)
@@ -162,6 +166,8 @@ namespace Persistance.Concrets
                     throw new FileSizeException();
                 }
                 string newFileName = await image.FileUploadAsync(_webHostEnvironment.WebRootPath, "Images");
+                FileUploadResult fileUploadResult=  await _fileService.UploudFileAsync("hotelimages", image);
+              
                 ImageHotel newImage = new ImageHotel
                 {
                     ImageName = newFileName,

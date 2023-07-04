@@ -1,4 +1,5 @@
 ﻿using Application.Abstract;
+using Application.Abstract.Common;
 using Application.DTOs;
 using Application.DTOs.HotelDto;
 using Application.DTOs.ImageHotelDto;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Persistance.Concrets;
 using Persistance.DataContext;
+using Stripe;
 using Travel_project.EXception;
 using static System.Net.WebRequestMethods;
 
@@ -23,12 +25,19 @@ namespace Travel_project.Controllers
         readonly IHotelServices _services;
         readonly TravelDbContext _context;
         readonly IWebHostEnvironment _environment;
-        public HotelController(IHotelServices services, IWebHostEnvironment environment, TravelDbContext context)
+        private readonly IAzureFileService _fileService;
+
+        public HotelController(IHotelServices services,
+               TravelDbContext context, 
+               IWebHostEnvironment environment,
+               IAzureFileService fileService)
         {
             _services = services;
-            _environment = environment;
             _context = context;
+            _environment = environment;
+            _fileService = fileService;
         }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] PostHotelDto postHotelDto)
         {
@@ -117,7 +126,7 @@ namespace Travel_project.Controllers
         {
             try
             {
-                return Ok(await _services.UpdateImagesHotelAsync(images, hotelId));
+               return Ok(await _services.UpdateImagesHotelAsync(images, hotelId));
             }
             catch (NotFoundException ex)
             {
