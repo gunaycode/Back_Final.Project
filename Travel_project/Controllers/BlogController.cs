@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataContext;
+using Travel_project.EXception;
 
 namespace Travel_project.Controllers
 {

@@ -10,12 +10,14 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Persistance.Concrets;
 using Persistance.DataContext;
+using Travel_project.EXception;
 using static System.Net.WebRequestMethods;
 
 namespace Travel_project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Roles = "SuperAdmin,Admin")]
     public class HotelController : ControllerBase
     {
         readonly IHotelServices _services;

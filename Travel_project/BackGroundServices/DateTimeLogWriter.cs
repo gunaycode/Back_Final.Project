@@ -30,7 +30,6 @@ namespace Travel_project.BackGroundServices
                 UserManager<User> scopedProcessingService =
                     scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-
                 var today = DateTime.Today;
                 var usersWithBirthday = await scopedProcessingService.Users
                     .Where(u => u.BirthDate.HasValue && u.BirthDate.Value.Day == today.Day && u.BirthDate.Value.Month == today.Month)

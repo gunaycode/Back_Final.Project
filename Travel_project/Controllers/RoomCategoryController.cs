@@ -10,11 +10,13 @@ using Microsoft.EntityFrameworkCore;
 using Persistance.Concrets;
 using Persistance.DataContext;
 using System.Data;
+using Travel_project.EXception;
 
 namespace Travel_project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Roles = "SuperAdmin,Admin")]
     public class RoomCategoryController:ControllerBase
     {
         private readonly TravelDbContext _context;

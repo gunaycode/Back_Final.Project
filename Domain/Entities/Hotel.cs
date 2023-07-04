@@ -10,7 +10,6 @@ namespace Domain.Entities
 {
     public class Hotel:BaseAuditable
     {
-
         public Hotel()
         {
             Images = new HashSet<ImageHotel>();

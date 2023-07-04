@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataContext;
+using Travel_project.EXception;
 
 namespace Travel_project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Roles = "SuperAdmin,Admin")]
     public class CityController:ControllerBase
     {
         private readonly TravelDbContext _context;
@@ -23,7 +25,7 @@ namespace Travel_project.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "SuperAdmin,Admin")]
+       
         public async Task<IActionResult> Create([FromForm] PostCityDto postCityDto)
         {
             try

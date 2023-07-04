@@ -6,11 +6,13 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataContext;
+using Travel_project.EXception;
 
 namespace Travel_project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Roles = "SuperAdmin,Admin")]
     public class CountryController:ControllerBase
     {
         private readonly TravelDbContext _context;

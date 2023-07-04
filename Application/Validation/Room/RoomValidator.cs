@@ -16,7 +16,11 @@ namespace Application.Validation.Room
             RuleFor(p => p.Price)
               .NotEmpty()
               .NotNull();
-       }
+
+            RuleFor(r => r.Count)
+                .InclusiveBetween(1, 5)
+                .WithMessage("Maksimum değer 1; 5 aralığında olmalıdır.");
+        }
 
     }
 }

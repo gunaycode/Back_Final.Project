@@ -304,6 +304,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\e7e252f7-a09d-47f3-b688-e31ce383f01cScreenshot 2023-05-08 143411.png))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesBlog\17e2d54d-52a2-4c57-a007-0c795f6e6c86Screenshot 2023-06-04 200618.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>Travel_project</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Travel_project</BasePath>
+      <RelativePath>ImagesBlog/17e2d54d-52a2-4c57-a007-0c795f6e6c86Screenshot 2023-06-04 200618.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesBlog\17e2d54d-52a2-4c57-a007-0c795f6e6c86Screenshot 2023-06-04 200618.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesBlog\28dfd663-9ddd-4b70-9d05-39461a949fcaScreenshot 2023-05-08 143411.png))">
       <SourceType>Package</SourceType>
       <SourceId>Travel_project</SourceId>
@@ -351,6 +367,38 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesBlog\4ea0e283-6957-442b-b1c6-91d65ac01c40Screenshot 2023-06-04 200525.png))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesBlog\5101bd60-33b6-49cf-9826-348fec3f38c5Screenshot_20230302_121831.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>Travel_project</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Travel_project</BasePath>
+      <RelativePath>ImagesBlog/5101bd60-33b6-49cf-9826-348fec3f38c5Screenshot_20230302_121831.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesBlog\5101bd60-33b6-49cf-9826-348fec3f38c5Screenshot_20230302_121831.png))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesBlog\642e0792-2cef-46b4-8f91-c4d1a66173ffScreenshot 2023-05-09 113217.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>Travel_project</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Travel_project</BasePath>
+      <RelativePath>ImagesBlog/642e0792-2cef-46b4-8f91-c4d1a66173ffScreenshot 2023-05-09 113217.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesBlog\642e0792-2cef-46b4-8f91-c4d1a66173ffScreenshot 2023-05-09 113217.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesBlog\70e804bf-1a99-46ed-9196-8f00dee68087Screenshot 2023-05-09 113144.png))">
       <SourceType>Package</SourceType>

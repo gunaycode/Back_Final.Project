@@ -135,12 +135,14 @@ namespace Persistance.Concrets
 
         public async Task<List<GetImageBlogDto>> UpdateImagesHotelAsync(EditImageBlogDto editImageBlogDto, int blogId)
         {
-            Blog? blog = await _context.Blogs.FindAsync(blogId);
+            Blog? blog = await _context.Blogs.Include(i => i.Images).FirstOrDefaultAsync(i => i.Id == blogId);
             if (blog == null)
             {
                 throw new NotFoundException("Hotel not found");
             }
             List<GetImageBlogDto> updatedImages = new List<GetImageBlogDto>();
+            List<ImageBlog> updatedImagesBlog = new List<ImageBlog>();
+
 
             foreach (IFormFile image in editImageBlogDto.Images)
             {
@@ -160,7 +162,7 @@ namespace Persistance.Concrets
                     
                     Path = Path.Combine(_webHostEnvironment.WebRootPath, "BlogImages")
                 };
-
+                updatedImagesBlog.Add(newImage);
                 foreach (var item in blog.Images)
                 {
                     blog.Images.Remove(item);
@@ -174,6 +176,7 @@ namespace Persistance.Concrets
                     Url = $"https://localhost:7046/api/Blog/Images/{newImage.ImageName}"
                 });
             }
+            blog.Images = updatedImagesBlog;
             await _context.SaveChangesAsync();
             return updatedImages;
         }

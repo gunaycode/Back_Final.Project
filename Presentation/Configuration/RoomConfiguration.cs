@@ -21,9 +21,8 @@ namespace Persistance.Configuration
                 .IsRequired();
 
             builder.Property(c => c.Count)
-                .IsRequired()
-                .HasMaxLength(4);
-
+                .IsRequired();
+                
             builder.HasMany(r => r.Reservations)
                 .WithOne(reservation => reservation.Room)
                 .HasForeignKey(reservation => reservation.RoomId);
