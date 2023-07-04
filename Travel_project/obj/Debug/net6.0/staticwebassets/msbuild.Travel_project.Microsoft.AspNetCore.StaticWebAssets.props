@@ -576,6 +576,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesRoom\b2268589-5444-46c4-a0a4-56429f8356d5Screenshot 2023-05-09 113144.png))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesRoom\c35e95e7-775b-414f-ada8-d864a4e149daScreenshot 2023-05-09 113243.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>Travel_project</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Travel_project</BasePath>
+      <RelativePath>ImagesRoom/c35e95e7-775b-414f-ada8-d864a4e149daScreenshot 2023-05-09 113243.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesRoom\c35e95e7-775b-414f-ada8-d864a4e149daScreenshot 2023-05-09 113243.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesRoom\c4dec24d-6df6-4f28-bd68-1b45c76903fcScreenshot 2023-05-08 143411.png))">
       <SourceType>Package</SourceType>
       <SourceId>Travel_project</SourceId>
@@ -607,6 +623,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesRoom\e0351cb6-1c20-46a8-b4d3-003fbed637c4Screenshot 2023-05-09 113217.png))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesRoom\fcaea9fc-abc4-4571-bcf8-9824781399beScreenshot_20230301_111939.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>Travel_project</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Travel_project</BasePath>
+      <RelativePath>ImagesRoom/fcaea9fc-abc4-4571-bcf8-9824781399beScreenshot_20230301_111939.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ImagesRoom\fcaea9fc-abc4-4571-bcf8-9824781399beScreenshot_20230301_111939.png))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

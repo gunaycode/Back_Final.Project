@@ -25,6 +25,8 @@ namespace Persistance.Concrets
         private readonly TravelDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IAzureFileService _fileService;
+        private object fileUploadResult;
+
         public HotelServices(TravelDbContext context, IWebHostEnvironment webHostEnvironment, IAzureFileService fileService)
         {
             _context = context;
@@ -53,11 +55,13 @@ namespace Persistance.Concrets
                         throw new FileTypeException("Check exception");
                     if (!file.CheckFileType("image/"))
                         throw new FileSizeException();
-                    string newFileName = await file.FileUploadAsync(_webHostEnvironment.WebRootPath, "Images");
+                    //string newFileName = await file.FileUploadAsync(_webHostEnvironment.WebRootPath, "Images");
+                    FileUploadResult fileUploadResult = await _fileService.UploudFileAsync("hotelimages", file);
+
                     hotel.Images.Add(new ImageHotel()
                     {
-                        ImageName = newFileName,
-                        Path = newFileName,
+                        ImageName = fileUploadResult.fileName,
+                        Path = $"https://travelapi.blob.core.windows.net/{fileUploadResult.fileName}"
                     });
                 }
                 _context.Hotels.Add(hotel);
@@ -77,7 +81,7 @@ namespace Persistance.Concrets
                 Images = hotel.Images.Select(i => new GetImageDto()
                 {
                     Id = i.Id,
-                    Url = $"https://localhost:7046/api/Hotel/Images/{i.ImageName}"
+                    Url = $"https://travelapi.blob.core.windows.net/{i.ImageName}"
                 }).ToList()
             };
         }
@@ -138,7 +142,7 @@ namespace Persistance.Concrets
                 Images = h.Images.Select(i => new GetImageDto()
                 {
                     Id = i.Id,
-                    Url = $"https://localhost:7046/api/Hotel/Images/{i.ImageName}"
+                    Url = $""
                 }).ToList()
 
 
@@ -165,9 +169,8 @@ namespace Persistance.Concrets
                 {
                     throw new FileSizeException();
                 }
-                string newFileName = await image.FileUploadAsync(_webHostEnvironment.WebRootPath, "Images");
-                FileUploadResult fileUploadResult=  await _fileService.UploudFileAsync("hotelimages", image);
-              
+                //string newFileName = await image.FileUploadAsync(_webHostEnvironment.WebRootPath, "Images");
+                FileUploadResult fileUploadResult = await _fileService.UploudFileAsync("hotelimages", image);
                 ImageHotel newImage = new ImageHotel
                 {
                     ImageName = fileUploadResult.fileName,
@@ -178,7 +181,7 @@ namespace Persistance.Concrets
                 updatedImages.Add(new GetImageHotelDto
                 {
 
-                    ImageName =fileUploadResult.fileName,
+                    ImageName = fileUploadResult.fileName,
                     hotelId = hotelId,
                     Url = $"https://travelapi.blob.core.windows.net/{fileUploadResult.filePath}"
                 });
@@ -190,11 +193,8 @@ namespace Persistance.Concrets
 
         public async Task<GetHotelDto> DeleteAsync(int hotelId)
         {
-            Hotel? hotel = await _context.Hotels.FindAsync(hotelId);
-            if (hotel == null)
-            {
-                throw new NotFoundException("Hotel not found");
-            }
+            Hotel? hotel = await _context.Hotels.FindAsync(hotelId)
+                ?? throw new NotFoundException("Hotel not found");
             _context.Hotels.Remove(hotel);
             await _context.SaveChangesAsync();
             return new GetHotelDto();

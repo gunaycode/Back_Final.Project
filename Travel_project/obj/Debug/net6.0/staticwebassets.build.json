@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "u/gaacrmoncpPWy0Ov0KyOiZ/L4qVBbIiuA/EJiQwgw=",
+  "Hash": "/aFBtIZacLMZxL/cln9MHj02jeOx8/j/KNx1CIPY34k=",
   "Source": "Travel_project",
   "BasePath": "_content/Travel_project",
   "Mode": "Default",
@@ -629,6 +629,23 @@
       "OriginalItemSpec": "wwwroot\\ImagesRoom\\b2268589-5444-46c4-a0a4-56429f8356d5Screenshot 2023-05-09 113144.png"
     },
     {
+      "Identity": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\ImagesRoom\\c35e95e7-775b-414f-ada8-d864a4e149daScreenshot 2023-05-09 113243.png",
+      "SourceId": "Travel_project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\",
+      "BasePath": "_content/Travel_project",
+      "RelativePath": "ImagesRoom/c35e95e7-775b-414f-ada8-d864a4e149daScreenshot 2023-05-09 113243.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ImagesRoom\\c35e95e7-775b-414f-ada8-d864a4e149daScreenshot 2023-05-09 113243.png"
+    },
+    {
       "Identity": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\ImagesRoom\\c4dec24d-6df6-4f28-bd68-1b45c76903fcScreenshot 2023-05-08 143411.png",
       "SourceId": "Travel_project",
       "SourceType": "Discovered",
@@ -661,6 +678,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\ImagesRoom\\e0351cb6-1c20-46a8-b4d3-003fbed637c4Screenshot 2023-05-09 113217.png"
+    },
+    {
+      "Identity": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\ImagesRoom\\fcaea9fc-abc4-4571-bcf8-9824781399beScreenshot_20230301_111939.png",
+      "SourceId": "Travel_project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\asus\\Desktop\\Travel_project\\Travel_project\\wwwroot\\",
+      "BasePath": "_content/Travel_project",
+      "RelativePath": "ImagesRoom/fcaea9fc-abc4-4571-bcf8-9824781399beScreenshot_20230301_111939.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ImagesRoom\\fcaea9fc-abc4-4571-bcf8-9824781399beScreenshot_20230301_111939.png"
     }
   ]
 }

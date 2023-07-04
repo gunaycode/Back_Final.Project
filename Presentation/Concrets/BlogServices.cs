@@ -1,20 +1,14 @@
 ﻿using Application.Abstract;
+using Application.Abstract.Common;
 using Application.DTOs.BlogDto;
-using Application.DTOs.HotelDto;
+using Application.DTOs.FileService;
 using Application.DTOs.ImageBlogDto;
-using Application.DTOs.ImageHotelDto;
 using Domain.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataContext;
 using Persistance.Extantion;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistance.Concrets
 {
@@ -22,10 +16,13 @@ namespace Persistance.Concrets
     {
         private readonly TravelDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public BlogServices(TravelDbContext context, IWebHostEnvironment webHostEnvironment)
+        private readonly IAzureFileService _fileService;
+
+        public BlogServices(TravelDbContext context, IWebHostEnvironment webHostEnvironment, IAzureFileService azureFileService)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _fileService = azureFileService;
         }
 
         public async Task<GetBlogDto> CreateAsync(CreateBlogDto createBlogDto)
@@ -45,11 +42,12 @@ namespace Persistance.Concrets
                         throw new FileTypeException("Check exception");
                     if (!file.CheckFileType("image/"))
                         throw new FileSizeException();
-                    string newFileName = await file.FileUploadAsync(_webHostEnvironment.WebRootPath, "ImagesBlog");
+                    //string newFileName = await file.FileUploadAsync(_webHostEnvironment.WebRootPath, "ImagesBlog");
+                    FileUploadResult fileUploadResult = await _fileService.UploudFileAsync("blogimages", file);
                     blog.Images.Add(new ImageBlog()
                     {
-                        ImageName = newFileName,
-                        Path = newFileName,
+                        ImageName = fileUploadResult.fileName,
+                        Path = $"https://travelapi.blog.core.windows.net/blogimages/{fileUploadResult.fileName}",
                     });
                 }
                 _context.Blogs.Add(blog);
@@ -65,7 +63,7 @@ namespace Persistance.Concrets
                 BlogImages = blog.Images.Select(i => new GetBlogImageDto()
                 {
                     Id = i.Id,
-                    Url = $"https://localhost:7046/api/Blog/Images/{i.ImageName}"
+                    Url = $"https://travelapi.blog.core.windows.net/blogimages/{i.ImageName}"
                 }).ToList()
             };
         }
@@ -116,7 +114,7 @@ namespace Persistance.Concrets
                 BlogImages = h.Images.Select(i => new GetBlogImageDto()
                 {
                     Id = i.Id,
-                    Url = $"https://localhost:7046/api/Hotel/Images/{i.ImageName}"
+                    Url = $"https://travelapi.blog.core.windows.net/blogimages/{i.ImageName}"
                 }).ToList()
 
 
@@ -155,12 +153,12 @@ namespace Persistance.Concrets
                     throw new FileSizeException();
                 }
                 string newFileName = await image.FileUploadAsync(_webHostEnvironment.WebRootPath, "ImagesBlog");
+                FileUploadResult fileUploadResult = await _fileService.UploudFileAsync("blogimages", image);
                 ImageBlog newImage = new ImageBlog
                 {
                     ImageName = newFileName,
-                    BlogId = blogId,
-                    
-                    Path = Path.Combine(_webHostEnvironment.WebRootPath, "BlogImages")
+                    BlogId = blogId, 
+                    Path = $"https://travelapi.blog.core.windows.net/blogimages/{fileUploadResult.filePath}"
                 };
                 updatedImagesBlog.Add(newImage);
                 foreach (var item in blog.Images)
@@ -173,7 +171,7 @@ namespace Persistance.Concrets
                 {
                     ImageName = newImage.ImageName,
                     blogId=blogId,
-                    Url = $"https://localhost:7046/api/Blog/Images/{newImage.ImageName}"
+                    Url = $"https://travelapi.blog.core.windows.net/blogimages/{fileUploadResult.filePath}"
                 });
             }
             blog.Images = updatedImagesBlog;
