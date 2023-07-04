@@ -170,17 +170,17 @@ namespace Persistance.Concrets
               
                 ImageHotel newImage = new ImageHotel
                 {
-                    ImageName = newFileName,
+                    ImageName = fileUploadResult.fileName,
                     HotelId = hotelId,
-                    Path = Path.Combine(_webHostEnvironment.WebRootPath, "Images")
+                    Path = $"https://travelapi.blob.core.windows.net/{fileUploadResult.filePath}"
                 };
                 updatedImagesHotel.Add(newImage);
                 updatedImages.Add(new GetImageHotelDto
                 {
 
-                    ImageName = newImage.ImageName,
+                    ImageName =fileUploadResult.fileName,
                     hotelId = hotelId,
-                    Url = $"https://localhost:7046/api/Hotel/Images/{newImage.ImageName}"
+                    Url = $"https://travelapi.blob.core.windows.net/{fileUploadResult.filePath}"
                 });
             }
             hotel.Images = updatedImagesHotel;

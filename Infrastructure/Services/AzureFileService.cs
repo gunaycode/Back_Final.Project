@@ -31,4 +31,13 @@ public class AzureFileService : IAzureFileService
         return new FileUploadResult(file.FileName,$"{containerName}/{newFileName}");
 
     }
+
+
+    public void Delete(string containerName, string fileName)
+    {
+        _blobContainerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+        BlobClient blobClient = _blobContainerClient.GetBlobClient(fileName);
+        blobClient.Delete();
+    }
+
 }

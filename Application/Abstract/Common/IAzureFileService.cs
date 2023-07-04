@@ -7,5 +7,5 @@ namespace Application.Abstract.Common;
 public interface IAzureFileService
 {
     public Task<FileUploadResult> UploudFileAsync(string container, IFormFile file);
- 
+    public void Delete(string containerName, string fileName);
 }
